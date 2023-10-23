@@ -1,0 +1,8 @@
+//
+// Created by squip on 23/10/2023.
+//
+
+#ifndef PROJECT_CALENDAR_MANAGER_MAIN_H
+#define PROJECT_CALENDAR_MANAGER_MAIN_H
+
+#endif //PROJECT_CALENDAR_MANAGER_MAIN_H
