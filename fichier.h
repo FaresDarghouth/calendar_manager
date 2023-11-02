@@ -25,6 +25,8 @@ p_d_list create_list(int max_level);
 
 void insert(p_d_list list, p_d_cell cell);
 
-void print_empty_list(p_d_list list);
+void print_cell(p_d_cell cell);
+
+void print_list(p_d_list list);
 
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

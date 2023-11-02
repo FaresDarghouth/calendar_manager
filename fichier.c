@@ -20,7 +20,7 @@ p_d_list create_list(int max_level) {
     list->max_level = max_level;
     list->heads = (p_d_cell *)malloc(max_level * sizeof(p_d_cell));
     for (int i = 0; i < max_level; ++i) {
-        list->heads[i] = create_cell(0, i);
+        list->heads[i] = NULL;
     }
     return list;
 }
@@ -31,11 +31,30 @@ void insert(p_d_list list, p_d_cell cell) {
             list->heads[i] = cell;
         }
     }
-
+    else
+        printf("Error: cell level is greater than list max level\n");
 }
 
-void print_empty_list(p_d_list list) {
+void print_cell(p_d_cell cell) {
+    if (cell == NULL)
+        printf("NULL");
+    else
+        for (int i = 0; i < cell->level; ++i) {
+            printf("[ %d|@-]-->", cell->value);
+            print_cell(cell->next[i]);
+        }
+        /*for (int i = 0; i < cell->level; ++i) {
+            if (cell->next[i] != NULL)
+                printf("[ %d|@-]-->", cell->value);
+            else
+                printf("[ %d|@-]-->NULL", cell->value);
+        }*/
+}
+
+void print_list(p_d_list list) {
     for (int i = 0; i < list->max_level; ++i) {
-        printf("[list head_%d @-]-->%p\n", i, list->heads[i]);
+        printf("[list head_%d @-]-->", i);
+        print_cell(list->heads[i]);
+        printf("\n");
     }
 }
