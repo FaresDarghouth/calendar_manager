@@ -1,0 +1,3 @@
+C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendadr_manager/calendar_manager/cmake-build-debug/CMakeFiles/calendar_manager.dir
+C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendadr_manager/calendar_manager/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendadr_manager/calendar_manager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
