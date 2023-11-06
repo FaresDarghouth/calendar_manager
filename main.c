@@ -3,7 +3,7 @@
 //
 
 #include "main.h"
-#include "fichier.h"
+#include "fichier.c"
 #include <stdio.h>
 
 int main() {
