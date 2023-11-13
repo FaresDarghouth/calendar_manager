@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendadr_manager/calendar_manager
+# Install script for directory: C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendar_manager/calendar_manager
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendadr_manager/calendar_manager/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/squip/OneDrive - Efrei/Bureau/Travail/L2/Algo/project_calendar_manager/calendar_manager/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

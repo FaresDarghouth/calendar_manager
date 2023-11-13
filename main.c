@@ -15,6 +15,5 @@ int main() {
     printf("After insert:\n");
 
     print_list(list);
-    printf("plus de pb lets go");
     return 0;
 }

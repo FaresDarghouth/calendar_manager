@@ -35,7 +35,7 @@ void insert(p_d_list list, p_d_cell cell) {
         printf("Error: cell level is greater than list max level\n");
 }
 
-void print_cell(p_d_cell cell) {
+/*void print_cell(p_d_cell cell) {
     if (cell == NULL)
         printf("NULL");
     else
@@ -43,18 +43,26 @@ void print_cell(p_d_cell cell) {
             printf("[ %d|@-]-->", cell->value);
             print_cell(cell->next[i]);
         }
-        /*for (int i = 0; i < cell->level; ++i) {
-            if (cell->next[i] != NULL)
-                printf("[ %d|@-]-->", cell->value);
-            else
-                printf("[ %d|@-]-->NULL", cell->value);
-        }*/
+}*/
+
+void print_list_level(p_d_list list, int level) {
+    p_d_cell temp = NULL;
+    printf("[list head_%d @-]-->", level);
+    if (list->heads[level] != NULL) {
+        temp = list->heads[level];
+        while (temp != NULL) {
+            printf("[ %d|@-]-->", temp->value);
+            temp = temp->next[level];
+        }
+        printf("NULL");
+    }
+    else
+        printf("NULL");
 }
 
 void print_list(p_d_list list) {
     for (int i = 0; i < list->max_level; ++i) {
-        printf("[list head_%d @-]-->", i);
-        print_cell(list->heads[i]);
+        print_list_level(list, i);
         printf("\n");
     }
 }
