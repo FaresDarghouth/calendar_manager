@@ -23,9 +23,7 @@ p_d_cell create_cell(int value, int level);
 
 p_d_list create_list(int max_level);
 
-void insert(p_d_list list, p_d_cell cell);
-
-void print_cell(p_d_cell cell);
+void insert_head(p_d_list list, p_d_cell cell);
 
 void print_list_level(p_d_list list, int level);
 

@@ -25,8 +25,11 @@ p_d_list create_list(int max_level) {
     return list;
 }
 
-void insert(p_d_list list, p_d_cell cell) {
+void insert_head(p_d_list list, p_d_cell cell) {
     if (cell->level < list->max_level) {
+        for (int i = 0; i < cell->level; ++i) {
+            cell->next[i] = list->heads[i];
+        }
         for (int i = 0; i < cell->level; ++i) {
             list->heads[i] = cell;
         }
@@ -34,16 +37,6 @@ void insert(p_d_list list, p_d_cell cell) {
     else
         printf("Error: cell level is greater than list max level\n");
 }
-
-/*void print_cell(p_d_cell cell) {
-    if (cell == NULL)
-        printf("NULL");
-    else
-        for (int i = 0; i < cell->level; ++i) {
-            printf("[ %d|@-]-->", cell->value);
-            print_cell(cell->next[i]);
-        }
-}*/
 
 void print_list_level(p_d_list list, int level) {
     p_d_cell temp = NULL;
