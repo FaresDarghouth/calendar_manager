@@ -53,9 +53,63 @@ void print_list_level(p_d_list list, int level) {
         printf("NULL");
 }
 
+int nb_digits(int n) {
+    int count = 0;
+    if (n == 0)
+        return 1;
+    if (n < 0)
+        ++count;
+    while (n != 0) {
+        n /= 10;
+        ++count;
+    }
+    return count;
+}
+
+void print_n_times(char *str, int n) {
+    for (int i = 0; i < n; ++i) {
+        printf("%s", str);
+    }
+}
+
+void print_lign(int n) {
+    print_n_times("-", 3);
+    print_n_times("-", nb_digits(n));
+    printf("-->");
+}
+
+void print_list_level_modified(p_d_list list, int level) {
+    p_d_cell temp = NULL;
+    p_d_cell level_0 = NULL;
+    printf("[list head_%d @-]-->", level);
+    if (list->heads[level] != NULL) {
+        temp = list->heads[level];
+        level_0 = list->heads[0];
+        while (temp != NULL) {
+            while (temp != level_0) {
+                print_lign(temp->value);
+                level_0 = level_0->next[0];
+            }
+            printf("[ %d|@-]-->", temp->value);
+            temp = temp->next[level];
+            level_0 = level_0->next[0];
+        }
+        printf("NULL");
+    }
+    else
+        printf("NULL");
+}
+
 void print_list(p_d_list list) {
     for (int i = 0; i < list->max_level; ++i) {
         print_list_level(list, i);
+        printf("\n");
+    }
+}
+
+void print_list_modified(p_d_list list) {
+    for (int i = 0; i < list->max_level; ++i) {
+        print_list_level_modified(list, i);
         printf("\n");
     }
 }

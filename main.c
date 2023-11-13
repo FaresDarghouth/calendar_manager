@@ -11,9 +11,12 @@ int main() {
     print_list(list);
 
     insert_head(list, create_cell(18, 3));
-    insert_head(list, create_cell(25, 4));
+    insert_head(list, create_cell(25, 1));
+    insert_head(list, create_cell(3, 1));
+    insert_head(list, create_cell(12, 3));
     printf("After insert_head:\n");
 
-    print_list(list);
+    //print_list(list);
+    print_list_modified(list);
     return 0;
 }
