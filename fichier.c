@@ -72,32 +72,24 @@ void print_n_times(char *str, int n) {
     }
 }
 
-void print_lign(int n) {
-    print_n_times("-", 3);
-    print_n_times("-", nb_digits(n));
-    printf("-->");
-}
-
 void print_list_level_modified(p_d_list list, int level) {
     p_d_cell temp = NULL;
     p_d_cell level_0 = NULL;
-    printf("[list head_%d @-]-->", level);
-    if (list->heads[level] != NULL) {
-        temp = list->heads[level];
-        level_0 = list->heads[0];
-        while (temp != NULL) {
-            while (temp != level_0) {
-                print_lign(temp->value);
-                level_0 = level_0->next[0];
-            }
-            printf("[ %d|@-]-->", temp->value);
+    printf("[list head_%d @-]--", level);
+    temp = list->heads[level];
+    level_0 = list->heads[0];
+    while (level_0 != NULL) {
+        if (temp != level_0 || temp == NULL) {
+            print_n_times("-", nb_digits(level_0->value)+9);
+            level_0 = level_0->next[0];
+        }
+        else {
+            printf(">[ %d|@-]--", temp->value);
             temp = temp->next[level];
             level_0 = level_0->next[0];
         }
-        printf("NULL");
     }
-    else
-        printf("NULL");
+    printf(">NULL");
 }
 
 void print_list(p_d_list list) {

@@ -31,8 +31,6 @@ int nb_digits(int n);
 
 void print_n_times(char *str, int n);
 
-void print_lign(int n);
-
 void print_list_level_modified(p_d_list list, int level);
 
 void print_list(p_d_list list);
