@@ -8,7 +8,7 @@
 
 int main() {
     p_d_list list = create_list(5);
-    display_list(list);
+    display_list_uniform(list);
 
     insert_head(list, create_cell(18, 3));
     insert_head(list, create_cell(25, 1));
@@ -19,8 +19,6 @@ int main() {
     insert_head(list, create_cell(2, 1));
     insert_head(list, create_cell(4, 1));
     printf("After insert_head:\n\n");
-    printf("\n");
-    //display_list(list);
     display_list_uniform(list);
     return 0;
 }
