@@ -26,7 +26,7 @@ p_d_list create_list(int max_level) {
 }
 
 void insert_head(p_d_list list, p_d_cell cell) {
-    if (cell->level < list->max_level) {
+    if (cell->level <= list->max_level) {
         for (int i = 0; i < cell->level; ++i) {
             cell->next[i] = list->heads[i];
         }
@@ -38,7 +38,7 @@ void insert_head(p_d_list list, p_d_cell cell) {
         printf("Error: cell level is greater than list max level\n");
 }
 
-void print_list_level(p_d_list list, int level) {
+void display_list_level(p_d_list list, int level) {
     p_d_cell temp = NULL;
     printf("[list head_%d @-]-->", level);
     if (list->heads[level] != NULL) {
@@ -53,26 +53,7 @@ void print_list_level(p_d_list list, int level) {
         printf("NULL");
 }
 
-int nb_digits(int n) {
-    int count = 0;
-    if (n == 0)
-        return 1;
-    if (n < 0)
-        ++count;
-    while (n != 0) {
-        n /= 10;
-        ++count;
-    }
-    return count;
-}
-
-void print_n_times(char *str, int n) {
-    for (int i = 0; i < n; ++i) {
-        printf("%s", str);
-    }
-}
-
-void print_list_level_modified(p_d_list list, int level) {
+void display_list_level_uniform(p_d_list list, int level) {
     p_d_cell temp = NULL;
     p_d_cell level_0 = NULL;
     printf("[list head_%d @-]--", level);
@@ -92,16 +73,16 @@ void print_list_level_modified(p_d_list list, int level) {
     printf(">NULL");
 }
 
-void print_list(p_d_list list) {
+void display_list(p_d_list list) {
     for (int i = 0; i < list->max_level; ++i) {
-        print_list_level(list, i);
+        display_list_level(list, i);
         printf("\n");
     }
 }
 
-void print_list_modified(p_d_list list) {
+void display_list_uniform(p_d_list list) {
     for (int i = 0; i < list->max_level; ++i) {
-        print_list_level_modified(list, i);
+        display_list_level_uniform(list, i);
         printf("\n");
     }
 }

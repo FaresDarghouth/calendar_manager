@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "utils.h"
 
 typedef struct s_d_cell {
     int value;
@@ -25,16 +26,12 @@ p_d_list create_list(int max_level);
 
 void insert_head(p_d_list list, p_d_cell cell);
 
-void print_list_level(p_d_list list, int level);
+void display_list_level(p_d_list list, int level);
 
-int nb_digits(int n);
+void display_list(p_d_list list);
 
-void print_n_times(char *str, int n);
+void display_list_level_uniform(p_d_list list, int level);
 
-void print_list_level_modified(p_d_list list, int level);
-
-void print_list(p_d_list list);
-
-void print_list_modified(p_d_list list);
+void display_list_uniform(p_d_list list);
 
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H
