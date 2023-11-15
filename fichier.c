@@ -86,3 +86,25 @@ void display_list_uniform(p_d_list list) {
         printf("\n");
     }
 }
+
+void sorted_insert(p_d_list list, p_d_cell cell) {
+    p_d_cell temp = NULL;
+    if (cell->level <= list->max_level) {
+        for (int i = 0; i < cell->level; ++i) {
+            if (list->heads[i] == NULL || cell->value < list->heads[i]->value) {
+                cell->next[i] = list->heads[i];
+                list->heads[i] = cell;
+            }
+            else {
+                temp = list->heads[i];
+                while (temp->next[i] != NULL && temp->next[i]->value < cell->value) {
+                    temp = temp->next[i];
+                }
+                cell->next[i] = temp->next[i];
+                temp->next[i] = cell;
+            }
+        }
+    }
+    else
+        printf("Error: cell level is greater than list max level\n");
+}

@@ -34,4 +34,6 @@ void display_list_level_uniform(p_d_list list, int level);
 
 void display_list_uniform(p_d_list list);
 
+void sorted_insert(p_d_list list, p_d_cell cell);
+
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

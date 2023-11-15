@@ -20,5 +20,17 @@ int main() {
     insert_head(list, create_cell(4, 1));
     printf("After insert_head:\n\n");
     display_list_uniform(list);
+
+    p_d_list list2 = create_list(5);
+    sorted_insert(list2, create_cell(1, 3));
+    sorted_insert(list2, create_cell(2, 1));
+    sorted_insert(list2, create_cell(3, 1));
+    sorted_insert(list2, create_cell(5, 1));
+    printf("After sorted_insert:\n\n");
+    display_list_uniform(list2);
+    sorted_insert(list2, create_cell(4, 3));
+    sorted_insert(list2, create_cell(1, 4));
+    printf("After sorted_insert with cell->value = 4:\n\n");
+    display_list_uniform(list2);
     return 0;
 }
