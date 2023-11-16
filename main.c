@@ -3,8 +3,6 @@
 //
 
 #include "main.h"
-#include "fichier.h"
-#include <stdio.h>
 
 int main() {
     p_d_list list = create_list(5);
@@ -22,15 +20,14 @@ int main() {
     display_list_uniform(list);
 
     p_d_list list2 = create_list(5);
-    sorted_insert(list2, create_cell(1, 3));
+    sorted_insert(list2, create_cell(5, 3));
+    sorted_insert(list2, create_cell(4, 1));
     sorted_insert(list2, create_cell(2, 1));
-    sorted_insert(list2, create_cell(3, 1));
-    sorted_insert(list2, create_cell(5, 1));
+    sorted_insert(list2, create_cell(1, 3));
     printf("After sorted_insert:\n\n");
     display_list_uniform(list2);
-    sorted_insert(list2, create_cell(4, 3));
-    sorted_insert(list2, create_cell(1, 4));
-    printf("After sorted_insert with cell->value = 4:\n\n");
+    sorted_insert(list2, create_cell(3, 4));
+    printf("After sorted_insert with cell->value = 3:\n\n");
     display_list_uniform(list2);
     return 0;
 }
