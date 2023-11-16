@@ -4,6 +4,16 @@
 
 #include "utils.h"
 
+void newline() {
+    printf("\n");
+}
+
+void print_line() {
+    newline();
+    print_n_times_char('-', 80);
+    newline();
+}
+
 int nb_digits(int n) {
     int count = 0;
     if (n == 0)
@@ -17,8 +27,8 @@ int nb_digits(int n) {
     return count;
 }
 
-void print_n_times(char *str, int n) {
+void print_n_times_char(char c, int n) {
     for (int i = 0; i < n; ++i) {
-        printf("%s", str);
+        printf("%c", c);
     }
 }

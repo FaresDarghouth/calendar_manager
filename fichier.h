@@ -26,6 +26,8 @@ p_d_list create_list(int max_level);
 
 void insert_head(p_d_list list, p_d_cell cell);
 
+void sorted_insert(p_d_list list, p_d_cell cell);
+
 void display_list_level(p_d_list list, int level);
 
 void display_list(p_d_list list);
@@ -33,7 +35,5 @@ void display_list(p_d_list list);
 void display_list_level_uniform(p_d_list list, int level);
 
 void display_list_uniform(p_d_list list);
-
-void sorted_insert(p_d_list list, p_d_cell cell);
 
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

@@ -7,8 +7,12 @@
 
 #include <stdio.h>
 
+void newline();
+
+void print_line();
+
 int nb_digits(int n);
 
-void print_n_times(char *str, int n);
+void print_n_times_char(char c, int n);
 
 #endif //CALENDAR_MANAGER_UTILS_H
