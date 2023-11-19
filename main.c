@@ -47,5 +47,6 @@ int main() {
     newline();
     newline();
     display_list_uniform(list3);
+    printf("camille");
     return 0;
 }
