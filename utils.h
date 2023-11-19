@@ -15,4 +15,6 @@ int nb_digits(int n);
 
 void print_n_times_char(char c, int n);
 
+int power(int x, int n);
+
 #endif //CALENDAR_MANAGER_UTILS_H

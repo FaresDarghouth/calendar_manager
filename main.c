@@ -5,7 +5,7 @@
 #include "main.h"
 
 int main() {
-    p_d_list list = create_list(5);
+    /*p_d_list list = create_list(5);
     printf("After create_list (empty list):");
     newline();
     newline();
@@ -41,6 +41,11 @@ int main() {
     printf("After sorted_insert with cell->value = 3:");
     newline();
     newline();
-    display_list_uniform(list2);
+    display_list_uniform(list2);*/
+    p_d_list list3 = create_list_for_search(4);
+    printf("After create_list_for_search:");
+    newline();
+    newline();
+    display_list_uniform(list3);
     return 0;
 }

@@ -24,6 +24,8 @@ p_d_cell create_cell(int value, int level);
 
 p_d_list create_list(int max_level);
 
+p_d_list create_list_for_search(int n);
+
 void insert_head(p_d_list list, p_d_cell cell);
 
 void sorted_insert(p_d_list list, p_d_cell cell);

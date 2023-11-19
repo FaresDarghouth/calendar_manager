@@ -32,3 +32,11 @@ void print_n_times_char(char c, int n) {
         printf("%c", c);
     }
 }
+
+int power(int x, int n) {
+    int result = 1;
+    for (int i = 0; i < n; ++i) {
+        result *= x;
+    }
+    return result;
+}

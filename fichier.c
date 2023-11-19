@@ -37,6 +37,17 @@ p_d_list create_list(int max_level) {
     return list;
 }
 
+p_d_list create_list_for_search(int n) {
+    p_d_list list = create_list(n);
+    int nb_of_cells = power(2, n) - 1;
+    for (int i = 0; i < n; ++i) {
+        for (int y = power(2, i); y <= nb_of_cells; y += power(2, i + 1)) {
+            sorted_insert(list, create_cell(y, i+1));
+        }
+    }
+    return list;
+}
+
 /*-------------------------------------------------------------------------------*/
 
 /*
