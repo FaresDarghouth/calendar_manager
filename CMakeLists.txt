@@ -9,4 +9,8 @@ add_executable(calendar_manager
         fichier.c
         fichier.h
         main.c
-        main.h utils.c utils.h)
+        main.h
+        utils.c
+        utils.h
+        part3.c
+        part3.h)
