@@ -198,22 +198,44 @@ int search_value(p_d_list list, int value) {
             return 1;
     }
     return 0;
-}*/
+}
 
 int search_value(p_d_list list, int value) {
     int i = list->max_level - 1;
     p_d_cell temp = list->heads[i];
-    p_d_cell previous = NULL;
+    p_d_cell previous = temp;
     //while (temp != NULL && temp->value != value) {
     while (temp->value != value) {
         if (temp->next[i] == NULL || temp->value > value) {
             --i;
-            temp = list->heads[i];
+            previous = list->heads[i];
+            temp = previous;
         }
-        else
+        else {
+            previous = temp;
             temp = temp->next[i];
+        }
     }
     if (temp != NULL && temp->value == value)
         return 1;
     return 0;
+}*/
+
+int search_value_dichotomy(p_d_list list, int value) {
+    p_d_cell temp = NULL;
+    int i = list->max_level - 1;
+    temp = list->heads[i];
+    while (temp != NULL && temp->value != value && i - 1 >= 0) {
+        if (temp->value > value) {
+            --i;
+            temp = list->heads[i];
+        }
+        else if (temp->value < value) {
+            --i;
+            temp = temp->next[i];
+        }
+    }
+    if (temp != NULL && temp->value == value)
+        return 1;
+    return -1;
 }

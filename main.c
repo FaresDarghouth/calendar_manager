@@ -4,6 +4,13 @@
 
 #include "main.h"
 
+void is_present(p_d_list list, int value) {
+    if (search_value_dichotomy(list, value) == 1)
+        printf("%d is present.\n", value);
+    else
+        printf("%d is not present.\n", value);
+}
+
 int main() {
     /*p_d_list list = create_list(5);
     printf("After create_list (empty list):");
@@ -47,5 +54,6 @@ int main() {
     newline();
     newline();
     display_list_uniform(list3);
+    is_present(list3, 5);
     return 0;
 }
