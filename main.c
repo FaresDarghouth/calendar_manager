@@ -47,6 +47,6 @@ int main() {
     newline();
     newline();
     display_list_uniform(list3);
-    printf("%d", search_value_level0(list3, 3));
+    printf("%d", isValue(list3, 3, 3));
     return 0;
 }

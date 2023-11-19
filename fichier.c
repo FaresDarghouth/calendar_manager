@@ -178,3 +178,81 @@ int search_value_level0(p_d_list list, int value)
     }
     return 0;
 }
+
+/*int search_value_level(p_d_list list, int value, int maxlevel)
+{
+    p_d_cell temp = NULL;
+    temp = list->heads[maxlevel];
+    while (temp != NULL && temp->value != value)
+    {
+       if (temp->value > value)
+       {
+           int may = temp->value;
+           temp = list->heads[maxlevel-1];
+           for (int i = may; i>=0; i--)
+           {
+               if (temp->value == value)
+                   return 1;
+               else
+               {
+                   if (temp->value < value)
+                   {
+                        int may2 = li
+                   }
+               }
+           }
+       }
+       else
+       {
+
+       }
+    }
+    return 0;
+}
+
+int search_value_level(p_d_list list, int value, int maxlevel)
+{
+    if (list == NULL)
+        return -1;
+    if (isValue(list, value,maxlevel) == 1)
+        return 1;
+    else
+    {
+        isValue(list, value, maxlevel -1)
+    }
+        return search_value_level(list->heads[maxlevel-1], value, maxlevel-1);
+    else
+        return search_value_level(list->heads[maxlevel])->next,value, maxlevel);
+}*/
+
+int isValue(p_d_list list, int value, int maxlevel)
+{
+    p_d_cell temp = NULL;
+    temp = list->heads[maxlevel];
+    while (temp != NULL)
+    {
+        if (temp->value == value)
+            return 1;
+        else
+        {
+            temp = temp->next[maxlevel];
+            if (temp->value > value)
+            {
+                for (int i=temp->value; i<=0; --i)
+                {
+                    int may = temp->value;
+                    isValue(list, value, maxlevel-1);
+                    if (temp->value < value)
+                    {
+                        for (int j=temp->value; j < may; ++i)
+                        {
+                            isValue(list, value, maxlevel-1);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    return 0;
+}
