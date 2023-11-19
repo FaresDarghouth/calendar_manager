@@ -165,3 +165,55 @@ void display_list_uniform(p_d_list list) {
         printf("\n");
     }
 }
+
+/*-------------------------------------------------------------------------------*/
+
+/*
+ * Search functions
+ */
+
+/*int search_value(p_d_list list, int value) {
+
+    p_d_cell temp = NULL;
+    for (int i = list->max_level - 1; i >= 0; --i) {
+        temp = list->heads[i];
+        while (temp != NULL && temp->value < value) {
+            temp = temp->next[i];
+        }
+        if (temp != NULL && temp->value == value)
+            return 1;
+    }
+    return 0;
+}
+
+int search_value(p_d_list list, int value) {
+    p_d_cell cursor = NULL;
+    p_d_cell temp = NULL;
+    for (int i = list->max_level - 1; i >= 0; --i) {
+        cursor = list->heads[i];
+        while (cursor != NULL && cursor->value < value) {
+            cursor = cursor->next[i];
+        }
+        if (cursor != NULL && cursor->value == value)
+            return 1;
+    }
+    return 0;
+}*/
+
+int search_value(p_d_list list, int value) {
+    int i = list->max_level - 1;
+    p_d_cell temp = list->heads[i];
+    p_d_cell previous = NULL;
+    //while (temp != NULL && temp->value != value) {
+    while (temp->value != value) {
+        if (temp->next[i] == NULL || temp->value > value) {
+            --i;
+            temp = list->heads[i];
+        }
+        else
+            temp = temp->next[i];
+    }
+    if (temp != NULL && temp->value == value)
+        return 1;
+    return 0;
+}

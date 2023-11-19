@@ -42,7 +42,7 @@ int main() {
     newline();
     newline();
     display_list_uniform(list2);*/
-    p_d_list list3 = create_list_for_search(4);
+    p_d_list list3 = create_list_for_search(3);
     printf("After create_list_for_search:");
     newline();
     newline();
