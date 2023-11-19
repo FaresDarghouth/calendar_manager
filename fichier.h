@@ -38,4 +38,5 @@ void display_list_level_uniform(p_d_list list, int level);
 
 void display_list_uniform(p_d_list list);
 
+int search_value_level0(p_d_list list, int value);
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

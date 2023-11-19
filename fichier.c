@@ -165,3 +165,16 @@ void display_list_uniform(p_d_list list) {
         printf("\n");
     }
 }
+int search_value_level0(p_d_list list, int value)
+{
+    p_d_cell temp = NULL;
+    temp = list->heads[0];
+    while (temp != NULL)
+    {
+        if (temp->value == value)
+            return 1;
+        else
+            temp = temp->next[0];
+    }
+    return 0;
+}
