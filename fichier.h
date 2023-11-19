@@ -43,4 +43,8 @@ int search_value_level0(p_d_list list, int value);
 int search_value_level(p_d_list list, int value, int maxlevel);
 
 int isValue(p_d_list list, int value, int maxlevel);
+
+int maxvalue(p_d_list list, int value, int maxlevel);
+
+int minvalue(p_d_list list, int value, int maxlevel, int max);
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

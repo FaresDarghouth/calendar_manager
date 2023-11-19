@@ -225,34 +225,93 @@ int search_value_level(p_d_list list, int value, int maxlevel)
         return search_value_level(list->heads[maxlevel])->next,value, maxlevel);
 }*/
 
-int isValue(p_d_list list, int value, int maxlevel)
+int isValue(p_d_list list, int value, int level)
 {
+    //fonction permettant de vérifier si la valeur est dans le level
     p_d_cell temp = NULL;
-    temp = list->heads[maxlevel];
+    temp = list->heads[level];
     while (temp != NULL)
     {
         if (temp->value == value)
             return 1;
         else
         {
+            temp = temp->next[level];
+        }
+    }
+    return 0;
+}
+
+int maxvalue(p_d_list list, int value, int maxlevel)
+{
+    //fonction permettant de récupérer la première valeur max après celle cherchée
+    p_d_cell temp =NULL;
+    temp = list->heads[maxlevel];
+    int max = 0;
+    while (temp!=NULL)
+    {
+        while (value < temp->value)
+        {
+            max = temp->value;
             temp = temp->next[maxlevel];
-            if (temp->value > value)
+        }
+    }
+    return max;
+}
+
+int minvalue(p_d_list list, int value, int maxlevel, int max)
+{
+    //fonction permettant de récupérer la première valeur min après celle cherchée à partir du max d'avant
+    p_d_cell temp =NULL;
+    temp = list->heads[maxlevel];
+    int min = max;
+    while (temp!=NULL)
+    {
+        while (value > temp->value)
+        {
+            min = temp->value;
+            temp = temp->next[maxlevel];
+        }
+    }
+    return min;
+}
+
+
+int search_value_level(p_d_list list, int value, int maxlevel)
+{
+    while(maxlevel>0)
+    {
+        //si la valeur est bien présente dans le level on retourne 1
+        if (isValue(list, value, maxlevel) == 1)
+            return 1;
+        else
+        {
+            //on récupère la valeur max
+            int max = maxvalue(list, value, maxlevel);
+            //on décrémente le maxlevel pour se rendre dans le niveau en-dessous
+            --maxlevel;
+            //on fait une boucle permettant d'aller du max au 0
+            for (int i = max; i >= 0; --i)
             {
-                for (int i=temp->value; i<=0; --i)
-                {
-                    int may = temp->value;
-                    isValue(list, value, maxlevel-1);
-                    if (temp->value < value)
+                if (isValue(list, value, maxlevel) == 1)
+                    return 1;
+                else {
+                    //on récupère la valeur min
+                    int min = minvalue(list, value, maxlevel, max);
+                    --maxlevel;
+                    //on parcourt du max au min dans le level du dessous;
+                    for (int i=max; i> min; --i)
                     {
-                        for (int j=temp->value; j < may; ++i)
+                        if (isValue(list, value, maxlevel) == 1)
+                            return 1;
+                        else
                         {
-                            isValue(list, value, maxlevel-1);
+                            search_value_level(list, value, maxlevel);
                         }
                     }
                 }
             }
         }
-
     }
     return 0;
 }
