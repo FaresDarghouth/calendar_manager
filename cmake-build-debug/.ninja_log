@@ -1,7 +1,0 @@
-# ninja log v5
-0	116	7209976624851633	CMakeFiles/calendar_manager.dir/fichier.c.obj	d3b121103775fc40
-9	117	7209976624925073	CMakeFiles/calendar_manager.dir/main.c.obj	b02c13b4617394a
-2	72	7209977037827968	CMakeFiles/calendar_manager.dir/main.c.obj	b02c13b4617394a
-73	148	7209977038575435	calendar_manager.exe	8066cff638fbf1da
-1	66	7209977741573331	CMakeFiles/calendar_manager.dir/main.c.obj	b02c13b4617394a
-66	145	7209977742342321	calendar_manager.exe	8066cff638fbf1da
