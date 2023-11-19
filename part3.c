@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-char *scanString(void)
+/*char *scanString(void)
 {
     char *saisie = (char*)malloc(sizeof(char));
     scanf("%s", saisie);
@@ -50,4 +50,4 @@ void InfoRdv()
     Rdv rdv;
     printf("Entrez la date de rendez-vous : ");
     rdv.day
-}
+}*/
