@@ -49,13 +49,14 @@ int main() {
     newline();
     newline();
     display_list_uniform(list2);*/
-    p_d_list list3 = create_list_for_search(3);
+    p_d_list list3 = create_list_for_search(4);
     printf("After create_list_for_search:");
     newline();
     newline();
     display_list_uniform(list3);
-    for (int i = -5; i < 10; ++i) {
+    /*for (int i = 4; i <= 8; ++i) {
         is_present(list3, i);
-    }
+    }*/
+    //is_present(list3, 6);
     return 0;
 }
