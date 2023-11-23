@@ -172,6 +172,20 @@ void display_list_uniform(p_d_list list) {
  * Search functions
  */
 
+int search_value_level0(p_d_list list, int value) {
+    /*
+     * Search a value in the list
+     * The search is done in level 0 only
+     */
+    p_d_cell temp = list->heads[0];
+    while (temp != NULL) {
+        if (temp->value == value)
+            return 1;
+        temp = temp->next[0];
+    }
+    return 0;
+}
+
 int search_value_dichotomy(p_d_list list, int value) {
     /*
      * Search a value in the list
