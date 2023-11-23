@@ -250,7 +250,7 @@ int search_value_dichotomy(p_d_list list, int value) {
                 temp = temp->next[current_level];
             }
         }
-        else {
+        /*else {
             if (temp->next[current_level]->value > value) {
                 --current_level;
                 temp = temp->next[current_level];
@@ -259,7 +259,7 @@ int search_value_dichotomy(p_d_list list, int value) {
                 --current_level;
                 temp = list->heads[current_level];
             }
-        }
+        }*/
     }
     if (temp->value == value)
         return 1;

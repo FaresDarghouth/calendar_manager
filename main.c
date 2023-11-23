@@ -54,9 +54,9 @@ int main() {
     newline();
     newline();
     display_list_uniform(list3);
-    /*for (int i = 4; i <= 8; ++i) {
+    /*for (int i = 8; i <= 15; ++i) {
         is_present(list3, i);
     }*/
-    //is_present(list3, 6);
+    is_present(list3, 11);
     return 0;
 }
