@@ -4,18 +4,10 @@
 
 #include "main.h"
 
-void is_present(p_d_list list, int value) {
-    if (search_value_dichotomy(list, value) == 1)
-        printf("%d is present.\n", value);
-    else
-        printf("%d is not present.\n", value);
-}
-
 int main() {
-    /*p_d_list list = create_list(5);
+    p_d_list list = create_list(5);
     printf("After create_list (empty list):");
-    newline();
-    newline();
+    jump();
     display_list_uniform(list);
     print_line();
 
@@ -28,8 +20,7 @@ int main() {
     insert_head(list, create_cell(2, 1));
     insert_head(list, create_cell(4, 1));
     printf("After insert_head:");
-    newline();
-    newline();
+    jump();
     display_list_uniform(list);
     print_line();
 
@@ -39,23 +30,28 @@ int main() {
     sorted_insert(list2, create_cell(2, 1));
     sorted_insert(list2, create_cell(1, 3));
     printf("After sorted_insert:");
-    newline();
-    newline();
+    jump();
     display_list_uniform(list2);
     print_line();
 
     sorted_insert(list2, create_cell(3, 4));
-    printf("After sorted_insert with cell->value = 3:");
-    newline();
-    newline();
-    display_list_uniform(list2);*/
+    printf("After sorted_insert with a value of 3 and a level of 4:");
+    jump();
+    display_list_uniform(list2);
+    print_line();
+
     p_d_list list3 = create_list_for_search(3);
     printf("After create_list_for_search:");
-    newline();
-    newline();
+    jump();
     display_list_uniform(list3);
     for (int i = -5; i <= power(2, list3->max_level + 1); ++i) {
-        is_present(list3, i);
+        print_is_present_level0(list3, i);
+    }
+
+    print_line();
+
+    for (int i = -5; i <= power(2, list3->max_level + 1); ++i) {
+        print_is_present_dichotomy(list3, i);
     }
     return 0;
 }

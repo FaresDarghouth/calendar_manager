@@ -4,14 +4,18 @@
 
 #include "utils.h"
 
-void newline() {
+void new_line() {
     printf("\n");
 }
 
+void jump() {
+    printf("\n\n");
+}
+
 void print_line() {
-    newline();
+    new_line();
     print_n_times_char('-', 80);
-    newline();
+    jump();
 }
 
 int nb_digits(int n) {
@@ -39,4 +43,18 @@ int power(int x, int n) {
         result *= x;
     }
     return result;
+}
+
+void print_is_present_level0(p_d_list list, int value) {
+    if (search_value_level0(list, value) == 1)
+        printf("%d is present.\n", value);
+    else
+        printf("%d is not present.\n", value);
+}
+
+void print_is_present_dichotomy(p_d_list list, int value) {
+    if (search_value_dichotomy(list, value) == 1)
+        printf("%d is present.\n", value);
+    else
+        printf("%d is not present.\n", value);
 }

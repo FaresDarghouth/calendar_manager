@@ -127,7 +127,7 @@ void display_list(p_d_list list) {
      */
     for (int i = 0; i < list->max_level; ++i) {
         display_list_level(list, i);
-        printf("\n");
+        new_line();
     }
 }
 
@@ -162,7 +162,7 @@ void display_list_uniform(p_d_list list) {
      */
     for (int i = 0; i < list->max_level; ++i) {
         display_list_level_uniform(list, i);
-        printf("\n");
+        new_line();
     }
 }
 

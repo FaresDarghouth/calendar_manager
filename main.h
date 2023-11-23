@@ -5,7 +5,8 @@
 #ifndef PROJECT_CALENDAR_MANAGER_MAIN_H
 #define PROJECT_CALENDAR_MANAGER_MAIN_H
 
-#include "fichier.h"
 #include <stdio.h>
+#include "fichier.h"
+#include "utils.h"
 
 #endif //PROJECT_CALENDAR_MANAGER_MAIN_H

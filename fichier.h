@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "utils.h"
 
 typedef struct s_d_cell {
     int value;
