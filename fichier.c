@@ -172,94 +172,31 @@ void display_list_uniform(p_d_list list) {
  * Search functions
  */
 
-/*int search_value_dichotomy(p_d_list list, int value) {
- * Thomas
-    int current_level = list->max_level - 1;
-    p_d_cell temp = list->heads[current_level];
-
-    while (temp == NULL || temp->value > value && current_level > 0) {
-        --current_level;
-        temp = list->heads[current_level];
-    }
-    if (temp->value == value)
-        return 1;
-    else if (temp->value < value && current_level == 0)
-            return 0;
-
-    while (temp->next[current_level] != NULL && current_level != 0) {
-        if (temp->next[current_level]->value == value)
-            return 1;
-        else if (temp->next[current_level]->value < value)
-            temp = temp->next[current_level];
-        else
-            --current_level;
-    }
-}*/
-
-/*int search_value_dichotomy(p_d_list list, int value) {
+int search_value_dichotomy(p_d_list list, int value) {
+    /*
+     * Search a value in the list
+     * The search is done with a dichotomy method, starting from the highest level
+     */
     int current_level = list->max_level - 1;
     p_d_cell temp = list->heads[current_level];
 
     while (temp != NULL && temp->value != value) {
-        if (temp->next[current_level] == NULL) {
-            if (current_level == 0)
-                return 0;
-            --current_level;
-            if (temp->next[current_level]->value == value)
-                return 1;
-            else if (temp->next[current_level]->value > value) {
+        if (temp->value < value) {
+            if (temp->next[current_level] == NULL || temp->next[current_level]->value > value) {
+                if (temp->next[current_level] == NULL && current_level == 0)
+                    return 0;
                 --current_level;
-                temp = temp->next[current_level];
             }
-            else if (temp->next[current_level]->value < value) {
+            else if (temp->next[current_level]->value == value)
+                return 1;
+            else if (temp->next[current_level]->value < value)
                 temp = temp->next[current_level];
-            }
         }
         else {
-            if (temp->next[current_level]->value > value) {
-                --current_level;
-                temp = temp->next[current_level];
-            }
-            else if (temp->next[current_level]->value < value) {
-                --current_level;
-                temp = list->heads[current_level];
-            }
-        }
-    }
-    if (temp->value == value)
-        return 1;
-    return 0;
-}*/
-
-int search_value_dichotomy(p_d_list list, int value) {
-    int current_level = list->max_level - 1;
-    p_d_cell temp = list->heads[current_level];
-
-    while (temp != NULL && temp->value != value) {
-        if (temp->next[current_level] == NULL) {
-            if (current_level == 0)
+            if (temp->value == list->heads[0]->value && current_level == 0)
                 return 0;
-            --current_level;
-            if (temp->next[current_level]->value == value)
-                return 1;
-            else if (temp->next[current_level]->value > value) {
-                --current_level;
-                temp = temp->next[current_level];
-            }
-            else if (temp->next[current_level]->value < value) {
-                temp = temp->next[current_level];
-            }
+            temp = list->heads[--current_level];
         }
-        /*else {
-            if (temp->next[current_level]->value > value) {
-                --current_level;
-                temp = temp->next[current_level];
-            }
-            else if (temp->next[current_level]->value < value) {
-                --current_level;
-                temp = list->heads[current_level];
-            }
-        }*/
     }
     if (temp->value == value)
         return 1;
