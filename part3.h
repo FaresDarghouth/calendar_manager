@@ -24,10 +24,10 @@ typedef struct Rdv
     int dur_min;
     char *object;
     struct Rdv* next;
-} Rdv;
+} Rdv, * p_Rdv;
 
 void InfoContact();
 void InfoRdv();
-
+void ScanDate();
 
 #endif //CALENDAR_MANAGER_PART3_H
