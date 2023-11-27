@@ -3,6 +3,7 @@
 //
 
 #include "main.h"
+#include "part3.h"
 
 int main() {
     /*p_d_list list = create_list(5);
@@ -41,12 +42,15 @@ int main() {
     printf("After sorted_insert with cell->value = 3:");
     newline();
     newline();
-    display_list_uniform(list2);*/
+    display_list_uniform(list2);
     p_d_list list3 = create_list_for_search(3);
     printf("After create_list_for_search:");
     newline();
     newline();
-    display_list_uniform(list3);
-    printf("%d", search_value_level(list3, 3, 3));
+    display_list_uniform(list3);*/
+
+    char date[11];
+    ScanDate((char)date);
+    printf("Date saisie : %s\n", date);
     return 0;
 }
