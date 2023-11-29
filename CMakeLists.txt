@@ -13,4 +13,6 @@ add_executable(calendar_manager
         utils.c
         utils.h
         part3.c
-        part3.h)
+        part3.h
+        timer.h
+        timer.c)

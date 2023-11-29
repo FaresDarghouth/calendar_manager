@@ -41,4 +41,8 @@ int search_value_level0(p_d_list list, int value);
 
 int search_value_dichotomy(p_d_list list, int value);
 
+int nb_operation_search_value_level0(p_d_list list, int value);
+
+int nb_operation_search_value_dichotomy(p_d_list list, int value);
+
 #endif //PROJECT_CALENDAR_MANAGER_FICHIER_H

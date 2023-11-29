@@ -5,8 +5,8 @@
 #ifndef CALENDAR_MANAGER_UTILS_H
 #define CALENDAR_MANAGER_UTILS_H
 
-#include <stdio.h>
 #include "fichier.h"
+#include "timer.h"
 
 void new_line();
 
@@ -23,5 +23,15 @@ int power(int x, int n);
 void print_is_present_level0(p_d_list list, int value);
 
 void print_is_present_dichotomy(p_d_list list, int value);
+
+void print_time_level0(p_d_list list, int value);
+
+void print_time_dichotomy(p_d_list list, int value);
+
+void print_nb_operation_level0(p_d_list list, int value);
+
+void print_nb_operation_dichotomy(p_d_list list, int value);
+
+void print_both_np_operation(p_d_list list, int value);
 
 #endif //CALENDAR_MANAGER_UTILS_H

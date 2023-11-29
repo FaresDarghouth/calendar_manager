@@ -40,18 +40,33 @@ int main() {
     display_list_uniform(list2);
     print_line();
 
+//---------------------------------------------------------------------------------------------
+
     p_d_list list3 = create_list_for_search(3);
     printf("After create_list_for_search:");
     jump();
     display_list_uniform(list3);
+    printf("Test of search_value_level0:");
+    jump();
     for (int i = -5; i <= power(2, list3->max_level + 1); ++i) {
         print_is_present_level0(list3, i);
     }
 
     print_line();
 
+    printf("Test of search_value_dichotomy:");
+    jump();
     for (int i = -5; i <= power(2, list3->max_level + 1); ++i) {
         print_is_present_dichotomy(list3, i);
     }
+
+    print_line();
+
+    p_d_list list4 = create_list_for_search(17);
+    print_time_level0(list4, power(2, list4->max_level));
+    print_time_dichotomy(list4, power(2, list4->max_level));
+    //print_nb_operation_level0(list4, power(2, list4->max_level));
+    //print_nb_operation_dichotomy(list4, power(2, list4->max_level));
+    print_both_np_operation(list4, power(2, list4->max_level));
     return 0;
 }

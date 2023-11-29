@@ -3,6 +3,7 @@
 //
 
 #include "fichier.h"
+#include "utils.h"
 
 /*
  * Creation of cell and list
@@ -215,4 +216,53 @@ int search_value_dichotomy(p_d_list list, int value) {
     if (temp->value == value)
         return 1;
     return 0;
+}
+
+int nb_operation_search_value_level0(p_d_list list, int value) {
+    /*
+     * Search a value in the list
+     * The search is done in level 0 only
+     */
+    p_d_cell temp = list->heads[0];
+    int nb_operation = 1;
+    while (temp != NULL) {
+        ++nb_operation;
+        if (temp->value == value)
+            return nb_operation;
+        temp = temp->next[0];
+    }
+    return nb_operation;
+}
+
+int nb_operation_search_value_dichotomy(p_d_list list, int value) {
+    /*
+     * Search a value in the list
+     * The search is done with a dichotomy method, starting from the highest level
+     */
+    int current_level = list->max_level - 1;
+    p_d_cell temp = list->heads[current_level];
+    int nb_operation = 1;
+
+    while (temp != NULL && temp->value != value) {
+        ++nb_operation;
+        if (temp->value < value) {
+            if (temp->next[current_level] == NULL || temp->next[current_level]->value > value) {
+                if (temp->next[current_level] == NULL && current_level == 0)
+                    return nb_operation;
+                --current_level;
+            }
+            else if (temp->next[current_level]->value == value)
+                return nb_operation;
+            else if (temp->next[current_level]->value < value)
+                temp = temp->next[current_level];
+        }
+        else {
+            if (temp->value == list->heads[0]->value && current_level == 0)
+                return nb_operation;
+            temp = list->heads[--current_level];
+        }
+    }
+    if (temp->value == value)
+        return nb_operation;
+    return nb_operation;
 }
