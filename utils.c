@@ -86,7 +86,7 @@ void print_nb_operation_dichotomy(p_d_list list, int value) {
     printf("Number of operations for search_value_dichotomy: %d\n", nb_operation_search_value_dichotomy(list, value));
 }
 
-void print_both_np_operation(p_d_list list, int value) {
+void print_both_np_operation(p_d_list list) {
     srand(time(NULL));
     int random = rand() % power(2, list->max_level) + 1;
     printf("Random number: %d\n", random);

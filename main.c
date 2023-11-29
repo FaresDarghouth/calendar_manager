@@ -62,11 +62,21 @@ int main() {
 
     print_line();
 
-    p_d_list list4 = create_list_for_search(17);
+    p_d_list list4 = NULL;
+    /*for (int i = 0; i < 3; ++i) {
+        list4 = create_list_for_search(i);
+        print_time_level0(list4, power(2, list4->max_level));
+        print_time_dichotomy(list4, power(2, list4->max_level));
+        //print_nb_operation_level0(list4, power(2, list4->max_level));
+        //print_nb_operation_dichotomy(list4, power(2, list4->max_level));
+        print_both_np_operation(list4);
+    }*/
+    list4 = create_list_for_search(3);
     print_time_level0(list4, power(2, list4->max_level));
     print_time_dichotomy(list4, power(2, list4->max_level));
     //print_nb_operation_level0(list4, power(2, list4->max_level));
     //print_nb_operation_dichotomy(list4, power(2, list4->max_level));
-    print_both_np_operation(list4, power(2, list4->max_level));
+    print_both_np_operation(list4);
+
     return 0;
 }
