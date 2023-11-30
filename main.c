@@ -49,8 +49,19 @@ int main() {
     newline();
     display_list_uniform(list3);*/
 
-    char date[11];
+    /*char date[11];
     ScanDate((char)date);
     printf("Date saisie : %s\n", date);
-    return 0;
+    return 0;*/
+
+    Contact contacts[] = {
+            {"Chen",      "Camille"},
+            {"Darghouth", "Fares"},
+            {"Durand",    "Maxence"},
+            {"Belkaid",   "Yona"},
+            {"Oflazoglu", "Elena"},
+            {"Dargan",    "ELise"}
+    };
+    searchContact(contacts, )
+    }
 }

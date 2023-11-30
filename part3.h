@@ -9,7 +9,7 @@ typedef struct Contact
 {
     char *lname;
     char *fname;
-}Contact;
+}Contact, *p_Contact;
 
 char *scanString(void);
 
@@ -26,8 +26,11 @@ typedef struct Rdv
     struct Rdv* next;
 } Rdv, * p_Rdv;
 
-void InfoContact();
+void InfoContact(p_Contact *, int *);
+void loadContacts(p_Contact *, int *);
+void freeContacts(p_Contact, int);
 void InfoRdv();
 void ScanDate();
+void searchContact(struct Contact contacts[], int nbContacts);
 
 #endif //CALENDAR_MANAGER_PART3_H
