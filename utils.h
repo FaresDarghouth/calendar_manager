@@ -34,4 +34,8 @@ void print_nb_operation_dichotomy(p_d_list list, int value);
 
 void print_both_np_operation(p_d_list list);
 
+void print_both_np_operation_for_all_lists();
+
+void print_both_np_operation_aligned();
+
 #endif //CALENDAR_MANAGER_UTILS_H

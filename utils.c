@@ -89,7 +89,30 @@ void print_nb_operation_dichotomy(p_d_list list, int value) {
 void print_both_np_operation(p_d_list list) {
     srand(time(NULL));
     int random = rand() % power(2, list->max_level) + 1;
+    printf("For a list of %d levels and %d elements:\n", list->max_level, power(2, list->max_level));
     printf("Random number: %d\n", random);
     print_nb_operation_level0(list, random);
     print_nb_operation_dichotomy(list, random);
+}
+
+void print_both_np_operation_for_all_lists() {
+   for (int i = 1; i <= 3; ++i) {
+       p_d_list list = create_list_for_search(i);
+       print_both_np_operation(list);
+       jump();
+   }
+}
+
+void print_both_np_operation_aligned() {
+    for (int i = 1; i <= 17; ++i) {
+        p_d_list list = create_list_for_search(i);
+        int value = power(2, list->max_level);
+        printf("%d;", nb_operation_search_value_level0(list, value));
+    }
+    new_line();
+    for (int i = 1; i <= 17; ++i) {
+        p_d_list list = create_list_for_search(i);
+        int value = power(2, list->max_level);
+        printf("%d;", nb_operation_search_value_dichotomy(list, value));
+    }
 }
