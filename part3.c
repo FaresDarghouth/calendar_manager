@@ -7,7 +7,9 @@
 #include <stdio.h>
 #include <string.h>
 
+
 #define MAX_NAME_LENGTH 20
+
 
 char *scanString(void)
 {
@@ -17,39 +19,28 @@ char *scanString(void)
 }
 
 
-void InfoContact(p_Contact *contacts, int *nbContacts)
+p_contact scanContact()
 {
-    Contact contact;
+    t_contact contact;
     printf("Entrez le nom : ");
-    contact.lname = strdup(scanString());
+    contact.lname = scanString();
 
     printf("Entrez le prenom : ");
-    contact.fname = strdup(scanString());
-
-    *contacts = realloc(*contacts, (*nbContacts+1)* sizeof(Contact));
-    (*contacts)[*nbContacts++] = contact;
+    contact.fname = scanString();
 
     printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
-
-    FILE *file = fopen("contacts.txt", "a");
-    if (file != NULL)
-    {
-        fprintf(file, "%s %s\n", contact.lname, contact.fname);
-        fclose(file);
-    }
-    else
-        printf("Erreur lors de l'écriture dans le fichier.\n");
 }
 
-void loadContacts(p_Contact *contacts, int *nbContacts)
+
+void loadContacts(p_contact *contacts, int *nbContacts)
 {
     FILE *file = fopen("contacts.txt", "r");
     if (file != NULL)
     {
-        Contact contact;
+        t_contact contact;
         while (fscanf(file, "%ms %ms", &contact.lname, &contact.fname) == 2)
         {
-            *contacts = realloc(*contacts, (*nbContacts+1)*sizeof(Contact));
+            *contacts = realloc(*contacts, (*nbContacts+1)*sizeof(t_contact));
             (*contacts)[*nbContacts++] = contact;
         }
         fclose(file);
@@ -58,7 +49,7 @@ void loadContacts(p_Contact *contacts, int *nbContacts)
         printf("Le fichier de contacts n'existe pas encore.\n");
 }
 
-void freeContacts(p_Contact contacts, int nbContacts)
+void freeContacts(p_contact contacts, int nbContacts)
 {
     for (int i = 0; i < nbContacts; ++i)
     {
@@ -69,13 +60,37 @@ void freeContacts(p_Contact contacts, int nbContacts)
 }
 
 
+int saisirDate(int *jour, int *mois, int *annee) {
+    char buffer[100]; // Taille du tampon pour stocker la saisie de l'utilisateur
+
+    do {
+        printf("Veuillez saisir une date (jj/mm/aaaa) : ");
+
+        // Utilisation de fgets pour une saisie sécurisée
+        if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+            if (sscanf(buffer, "%d/%d/%d", jour, mois, annee) == 3) {
+                // Vérifie que la saisie est correcte
+                if (*jour >= 1 && *jour <= 31 && *mois >= 1 && *mois <= 12 && *annee >= 1000) {
+                    return 1; // Saisie valide
+                } else {
+                    printf("Date invalide. Veuillez réessayer.\n");
+                }
+            } else {
+                printf("Saisie incorrecte. Veuillez réessayer.\n");
+            }
+        } else {
+            printf("Erreur lors de la saisie. Veuillez réessayer.\n");
+        }
+
+    } while (1);
+}
 
 void ScanDate()
 {
     char buffer[11];
-    Rdv dday;
-    Rdv dmonth;
-    Rdv dyear;
+    t_rdv dday;
+    t_rdv dmonth;
+    t_rdv dyear;
 
     int saisie_inval = 0;
     do
@@ -103,12 +118,12 @@ void ScanDate()
 
 void InfoRdv()
 {
-    Rdv rdv;
+    t_rdv rdv;
     ScanDate();
 }
 
 //Fonction permettant la recherche d'un contact et propose une complétion automatique
-void searchContact(struct Contact contacts[], int nbContacts)
+void searchContact(t_contact contacts[], int nbContacts)
 {
     char partialName[MAX_NAME_LENGTH];
     do {

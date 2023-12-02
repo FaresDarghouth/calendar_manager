@@ -54,7 +54,7 @@ int main() {
     printf("Date saisie : %s\n", date);
     return 0;*/
 
-    Contact contacts[] = {
+    t_contact contacts[] = {
             {"Chen",      "Camille"},
             {"Darghouth", "Fares"},
             {"Durand",    "Maxence"},
