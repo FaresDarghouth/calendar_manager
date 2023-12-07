@@ -5,47 +5,68 @@
 #ifndef CALENDAR_MANAGER_PART3_H
 #define CALENDAR_MANAGER_PART3_H
 
-
-
-char *scanString(void);
-
-typedef struct Rdv
-{
-    int day;
-    int month;
-    int year;
-    int hour;
-    int min;
-    int dur_hour;
-    int dur_min;
-    char *object;
-    struct Rdv* next;
-} Rdv;
-
 typedef struct Contact
 {
     char *lname;
     char *fname;
 }t_contact, *p_contact;
 
+
+
+//struct for the date
+typedef struct s_date
+{
+    int day;
+    int month;
+    int year;
+}t_date, *p_date;
+
+//struct for the time
+typedef struct s_time
+{
+    int hour;
+    int min;
+}t_time, *p_time;
+
+//struct for an appointment
+typedef struct s_appointment
+{
+    t_time hour;
+    t_time durate;
+    char *object;
+    t_date date;
+    struct s_appointment *next;
+}t_appointment, *p_appointment;
+
+typedef struct s_entree
+{
+    t_contact contact;
+    t_appointment appointment;
+}t_entree, *p_entree;
+
+
+
 typedef struct calendar{
-    p_contact contact;
-    Rdv *appointment;
+    p_entree contact_apt;
     int level;
     struct calendar **next;
-} calendar;
+} calendar_cell;
 
 
 typedef struct calendar_list {
     int max_level;
-    calendar **heads;
+    calendar_cell **heads;
 } calendar_list;
 
-
+int compare_name(char*,char*);
+p_appointment InfoAppointment();
+char *scanString(void);
+calendar_cell *create_cell();
 calendar_list *create_list();
 char *scanString(void);
 void InfoContact();
 void InfoRdv();
+void add_calendar(calendar_list*);
 
 
 

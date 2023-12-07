@@ -129,10 +129,144 @@ calendar_list *create_list() {
     int max_level = 4;
     calendar_list *list = (calendar_list *)malloc(sizeof(calendar_list));
     list->max_level = max_level;
-    list->heads = (calendar **)malloc(max_level * sizeof(calendar *));
+
+    list->heads = (calendar_cell **)malloc(max_level * sizeof(calendar_cell *));
     for (int i = 0; i < max_level; ++i) {
         list->heads[i] = NULL;
     }
     return list;
 }
 
+p_appointment InfoAppointment()
+{
+    p_appointment myAppointment;
+
+    printf("Entrez les informations pour le rendez-vous :\n");
+
+    SecureScanTime(myAppointment); // Pour l'heure du rdv
+    SecureScanDurate(myAppointment); // Pour la durée du rdv
+    SecureScanDate(myAppointment); // Pour la date du rdv
+
+    return myAppointment;
+}
+
+
+calendar_cell *create_cell() {
+    /*
+     * Create a cell with a value and a level
+     * The cell is initialized with a NULL next array
+     */
+    calendar_cell *cell = (calendar_cell *)malloc(sizeof(calendar_cell));
+    cell->contact_apt->contact = *scanContact();
+    cell->contact_apt->appointment = infoAppointment();
+    cell->level = 4;
+    cell->next = (calendar_cell **)malloc(cell->level * sizeof(calendar_cell*));
+    for (int i = 0; i < cell->level; ++i) {
+        cell->next[i] = NULL;
+    }
+    return cell;
+}
+
+int compare_name(char* name1,char* name2)  {
+    //Cas 0 = first letter not equal
+    //Cas 1 = second letter not equal
+    //Cas 2 = third letter not equal
+    //Cas 3 = fourth letter not equal
+    int i = 0;
+    if(name1[0] != name2[0]){
+        i = 0;
+    }else{
+        if(name1[1] != name2[1]){
+            i = 1;
+        }else{
+            if(name1[2] != name2[2]){
+                i = 2;
+            }else{
+                i = 3;
+            }
+        }
+    }
+    return i;
+}
+
+void add_calendar (calendar_list* calendar){
+    int i, j, c = 1;
+    calendar_cell *new_cell;
+    calendar_cell *temp;
+    while(c == 1){
+        new_cell = create_cell();
+        if(calendar->heads[3] == NULL ){
+            for (i = 0; i < calendar->max_level; i++){
+                calendar->heads[i] = new_cell;
+            }
+        }else {
+            for(j = 0; j < calendar->max_level; j++){
+                temp = calendar->heads[j];
+                switch (compare_name(new_cell->contact_apt->contact.lname,temp->contact_apt->contact.lname)) {
+                    case 0 : // first letter not equal
+                        if((int) new_cell->contact_apt->contact.lname[0] < (int) temp->contact_apt->contact.lname[0]){
+                            for (i = 0; i < j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }else{
+                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[0] < (int) temp->next[j]->contact_apt->contact.lname[0])){
+                                temp = temp->next[j];
+                            }
+                            for (i = 0; i<j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }
+                    case 1 : // second letter not equal
+                        if((int) new_cell->contact_apt->contact.lname[1] < (int) temp->contact_apt->contact.lname[1]){
+                            for (i = 0; i < j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }else{
+                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[1] < (int) temp->next[j]->contact_apt->contact.lname[1])){
+                                temp = temp->next[j];
+                            }
+                            for (i = 0; i<j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }
+                    case 2 : // third letter not equal
+                        if((int) new_cell->contact_apt->contact.lname[2] < (int) temp->contact_apt->contact.lname[2]){
+                            for (i = 0; i < j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }else{
+                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[2] < (int) temp->next[j]->contact_apt->contact.lname[2])){
+                                temp = temp->next[j];
+                            }
+                            for (i = 0; i<j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }
+                    case 3 : // fourth letter not equal
+                        if((int) new_cell->contact_apt->contact.lname[3] < (int) temp->contact_apt->contact.lname[3]){
+                            for (i = 0; i < j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }else{
+                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[3] < (int) temp->next[j]->contact_apt->contact.lname[3])){
+                                temp = temp->next[j];
+                            }
+                            for (i = 0; i<j; i++){
+                                new_cell->next[i] = temp->next[i];
+                                temp->next[i] = new_cell;
+                            }
+                        }
+                }
+            }
+        }
+        printf("Enter 1 if you want to continue otherwise enter 0: ");
+        scanf("%d", &c);
+    }
+}
