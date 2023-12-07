@@ -120,3 +120,19 @@ p_contact scanContact()
 
     printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
 }
+
+calendar_list *create_list() {
+    /*
+     * Create a list with a max level
+     * The list is initialized with a NULL heads array
+     */
+    int max_level = 4;
+    calendar_list *list = (calendar_list *)malloc(sizeof(calendar_list));
+    list->max_level = max_level;
+    list->heads = (calendar **)malloc(max_level * sizeof(calendar *));
+    for (int i = 0; i < max_level; ++i) {
+        list->heads[i] = NULL;
+    }
+    return list;
+}
+

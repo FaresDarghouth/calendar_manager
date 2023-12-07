@@ -26,8 +26,23 @@ typedef struct Contact
 {
     char *lname;
     char *fname;
-}t_contact, p_contact;
+}t_contact, *p_contact;
 
+typedef struct calendar{
+    p_contact contact;
+    Rdv *appointment;
+    int level;
+    struct calendar **next;
+} calendar;
+
+
+typedef struct calendar_list {
+    int max_level;
+    calendar **heads;
+} calendar_list;
+
+
+calendar_list *create_list();
 char *scanString(void);
 void InfoContact();
 void InfoRdv();
