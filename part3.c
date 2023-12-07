@@ -31,6 +31,175 @@ p_contact scanContact()
     printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
 }
 
+int isLeapYear(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+int isValidDate(p_date date)
+{
+    if (date->year < 1) {
+        return 0; // Invalid year
+    }
+    if (date->month < 1 || date->month > 12) {
+        return 0; // Invalid year
+    }
+
+    int daysInMonth;
+    switch (date->month)
+    {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            daysInMonth = 31;
+            break;
+        case 4: case 6: case 9: case 11:
+            daysInMonth = 30;
+        case 2:
+            if (isLeapYear(date->year))
+            {
+                daysInMonth = 29;
+            }
+            else
+            {
+                daysInMonth = 28;
+            }
+            break;
+        default:
+            return 0; // Invalid month
+    }
+    return (date->day >= 1 && date->day <= daysInMonth);
+}
+
+int SecureScanDate(p_date date)
+{
+    char buffer[11];
+    int saisie_inval = 0;
+
+    do
+    {
+        printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
+        fgets(buffer, sizeof(buffer), stdin);
+
+        size_t length = strlen(buffer);
+        if (length > 0 && buffer[length - 1] == '\n')
+        {
+            buffer[length - 1] = '\0';
+        }
+        if (sscanf(buffer, "%2d/%2d/%4d", date->day, date->month, date->year) == 3 && isValidDate(date))
+        {
+            saisie_inval = 0; // Valid entry
+        }
+        else
+        {
+            printf("Format incorrect. Veuillez réessayer.\n");
+            saisie_inval = 1;
+        }
+    }
+    while(saisie_inval == 1);
+
+    return saisie_inval;
+}
+
+int isValidTime(p_time time)
+{
+    return (time->hour >= 0 && time->hour <= 23 && time->min >= 0 && time->min <= 59);
+}
+
+int SecureScanTime(p_time time)
+{
+    char buffer[6];
+    int saisie_inval = 0;
+
+    do
+    {
+        printf("Entrez l'heure de rendez-vous au format hh:mm : ");
+        fgets(buffer, sizeof(buffer), stdin);
+
+        size_t length = strlen(buffer);
+        if (length > 0 && buffer[length - 1] == '\n')
+        {
+            buffer[length - 1] = '\0';
+        }
+        if (sscanf(buffer, "%2d:%2d", time->hour, time->min) == 2 && isValidTime(time))
+        {
+            saisie_inval = 0; // Valid entry
+        }
+        else
+        {
+            printf("Format incorrect ou heure invalide. Veuillez réessayer.\n");
+            saisie_inval = 1;
+        }
+    }
+    while(saisie_inval == 1);
+
+    return saisie_inval;
+}
+
+int SecureScanDurate(p_time durate)
+{
+    char buffer[6];
+    int saisie_inval = 0;
+
+    do
+    {
+        printf("Entrez la durée du rendez-vous au format hh:mm : ");
+        fgets(buffer, sizeof(buffer), stdin);
+
+        size_t length = strlen(buffer);
+        if (length > 0 && buffer[length - 1] == '\n')
+        {
+            buffer[length - 1] = '\0';
+        }
+        if (sscanf(buffer, "%2d:%2d", durate->hour, durate->min) == 2 && isValidTime(durate))
+        {
+            saisie_inval = 0; // Valid entry
+        }
+        else
+        {
+            printf("Format incorrect ou durée invalide. Veuillez réessayer.\n");
+            saisie_inval = 1;
+        }
+    }
+    while(saisie_inval == 1);
+
+    return saisie_inval;
+}
+
+p_appointment InfoAppointment()
+{
+    p_appointment myAppointment;
+
+    printf("Entrez les informations pour le rendez-vous :\n");
+
+    SecureScanTime(myAppointment); // Pour l'heure du rdv
+    SecureScanDurate(myAppointment); // Pour la durée du rdv
+    SecureScanDate(myAppointment); // Pour la date du rdv
+
+    return myAppointment;
+}
+
+//Fonction permettant la recherche d'un contact et propose une complétion automatique
+/*void searchContact(t_contact contacts[], int nbContacts)
+{
+    char partialName[MAX_NAME_LENGTH];
+    do {
+        printf("Entrez le nom : ");
+        fgets(partialName, MAX_NAME_LENGTH, stdin);
+        partialName[strcspn(partialName, "\n")] = '\0'; // Supprime le saut de ligne de fgets
+
+        if (strlen(partialName) < 3) {
+            printf("Entrez au moins 3 lettres.\n");
+        }
+    } while (strlen(partialName) < 3);
+
+    printf("Résultats de la recherche :\n");
+    for (int i = 0; i < nbContacts; i++)
+    {
+        if (strncmp(contacts[i].fname, partialName, strlen(partialName)) == 0 || strncmp(contacts[i].lname, strlen(partialName)) == 0)
+        {
+            printf("%s %s \n", contacts[i].fname, contacts[i].lname);
+        }
+    }
+}
 
 void loadContacts(p_contact *contacts, int *nbContacts)
 {
@@ -57,91 +226,4 @@ void freeContacts(p_contact contacts, int nbContacts)
         free(contacts[i].fname);
     }
     free(contacts);
-}
-
-
-int saisirDate(int *jour, int *mois, int *annee) {
-    char buffer[100]; // Taille du tampon pour stocker la saisie de l'utilisateur
-
-    do {
-        printf("Veuillez saisir une date (jj/mm/aaaa) : ");
-
-        // Utilisation de fgets pour une saisie sécurisée
-        if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
-            if (sscanf(buffer, "%d/%d/%d", jour, mois, annee) == 3) {
-                // Vérifie que la saisie est correcte
-                if (*jour >= 1 && *jour <= 31 && *mois >= 1 && *mois <= 12 && *annee >= 1000) {
-                    return 1; // Saisie valide
-                } else {
-                    printf("Date invalide. Veuillez réessayer.\n");
-                }
-            } else {
-                printf("Saisie incorrecte. Veuillez réessayer.\n");
-            }
-        } else {
-            printf("Erreur lors de la saisie. Veuillez réessayer.\n");
-        }
-
-    } while (1);
-}
-
-void ScanDate()
-{
-    char buffer[11];
-    t_rdv dday;
-    t_rdv dmonth;
-    t_rdv dyear;
-
-    int saisie_inval = 0;
-    do
-    {
-        printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
-        fgets(buffer, sizeof(buffer), stdin);
-        sscanf(buffer, "%2d/%2d/%4d", dday.day, dmonth.month, dyear.year);
-        size_t length = strlen(buffer);
-        if (length > 0 && buffer[length - 1] == '\n')
-        {
-            buffer[length - 1] = '\0';
-        }
-        if (sscanf(buffer, "%2d/%2d/%4d", dday.day, dmonth.month, dyear.year))
-        {
-            saisie_inval =1;
-        }
-        else
-        {
-            printf("Format incorrect. Veuillez réessayer.\n");
-        }
-        free(buffer);
-    }
-    while(saisie_inval==0);
-}
-
-void InfoRdv()
-{
-    t_rdv rdv;
-    ScanDate();
-}
-
-//Fonction permettant la recherche d'un contact et propose une complétion automatique
-void searchContact(t_contact contacts[], int nbContacts)
-{
-    char partialName[MAX_NAME_LENGTH];
-    do {
-        printf("Entrez le nom : ");
-        fgets(partialName, MAX_NAME_LENGTH, stdin);
-        partialName[strcspn(partialName, "\n")] = '\0'; // Supprime le saut de ligne de fgets
-
-        if (strlen(partialName) < 3) {
-            printf("Entrez au moins 3 lettres.\n");
-        }
-    } while (strlen(partialName) < 3);
-
-    printf("Résultats de la recherche :\n");
-    for (int i = 0; i < nbContacts; i++)
-    {
-        if (strncmp(contacts[i].fname, partialName, strlen(partialName)) == 0 || strncmp(contacts[i].lname, strlen(partialName)) == 0)
-        {
-            printf("%s %s \n", contacts[i].fname, contacts[i].lname);
-        }
-    }
-}
+}*/

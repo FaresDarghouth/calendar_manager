@@ -46,10 +46,19 @@ typedef struct s_entree
 }t_entree, *p_entree;
 
 p_contact scanContact();
+int isLeapYear(int);
+int isValidDate(p_date);
+int SecureScanDate(p_date);
+int isValidTime(p_time);
+int SecureScanTime(p_time);
+int SecureScanDurate(p_time);
+
+p_appointment InfoAppointment();
+
+
+
+/*void searchContact(t_contact contacts[], int nbContacts);
 void loadContacts(p_contact *, int *);
-void freeContacts(p_Contact, int);
-void InfoRdv();
-void ScanDate();
-void searchContact(t_contact contacts[], int nbContacts);
+void freeContacts(p_Contact, int);*/
 
 #endif //CALENDAR_MANAGER_PART3_H

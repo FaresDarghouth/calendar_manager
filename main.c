@@ -54,7 +54,7 @@ int main() {
     printf("Date saisie : %s\n", date);
     return 0;*/
 
-    t_contact contacts[] = {
+    /*t_contact contacts[] = {
             {"Chen",      "Camille"},
             {"Darghouth", "Fares"},
             {"Durand",    "Maxence"},
@@ -63,5 +63,7 @@ int main() {
             {"Dargan",    "ELise"}
     };
     searchContact(contacts, )
-    }
+    }*/
+    p_appointment myAppointment = InfoAppointment();
+    return 0;
 }
