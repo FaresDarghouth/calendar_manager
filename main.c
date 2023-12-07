@@ -64,6 +64,7 @@ int main() {
     };
     searchContact(contacts, )
     }*/
-    p_appointment myAppointment = InfoAppointment();
+    p_appointment myAppointment = ScanAppointment();
+    //getAppointment(myAppointment);
     return 0;
 }

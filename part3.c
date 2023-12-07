@@ -11,33 +11,30 @@
 #define MAX_NAME_LENGTH 20
 
 
-char *scanString(void)
-{
+char *scanString() {
     char *saisie = (char*)malloc(sizeof(char));
     scanf("%s", saisie);
     return saisie;
 }
 
 
-p_contact scanContact()
-{
-    t_contact contact;
+p_contact scanContact() {
+    p_contact contact = (p_contact)malloc(sizeof(t_contact));
+
     printf("Entrez le nom : ");
-    contact.lname = scanString();
+    contact->lname = scanString();
 
     printf("Entrez le prenom : ");
-    contact.fname = scanString();
+    contact->fname = scanString();
 
-    printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
+    return contact;
 }
 
-int isLeapYear(int year)
-{
+int isLeapYear(int year) {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-int isValidDate(p_date date)
-{
+int isValidDate(p_date date) {
     if (date->year < 1) {
         return 0; // Invalid year
     }
@@ -69,14 +66,18 @@ int isValidDate(p_date date)
     return (date->day >= 1 && date->day <= daysInMonth);
 }
 
-int SecureScanDate(p_date date)
-{
+int isValidTime(p_time time) {
+    return (time->hour >= 0 && time->hour <= 23 && time->min >= 0 && time->min <= 59);
+}
+
+p_date SecureScanDate() {
     char buffer[11];
     int saisie_inval = 0;
+    int day, month, year;
+    p_date date = (p_date)malloc(sizeof(t_date));
 
     do
     {
-        printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
@@ -84,7 +85,7 @@ int SecureScanDate(p_date date)
         {
             buffer[length - 1] = '\0';
         }
-        if (sscanf(buffer, "%2d/%2d/%4d", date->day, date->month, date->year) == 3 && isValidDate(date))
+        if (sscanf(buffer, "%2d/%2d/%4d", &day, &month, &year) == 3 && isValidDate(date))
         {
             saisie_inval = 0; // Valid entry
         }
@@ -96,22 +97,21 @@ int SecureScanDate(p_date date)
     }
     while(saisie_inval == 1);
 
-    return saisie_inval;
+    date->day = day;
+    date->month = month;
+    date->year = year;
+
+    return date;
 }
 
-int isValidTime(p_time time)
-{
-    return (time->hour >= 0 && time->hour <= 23 && time->min >= 0 && time->min <= 59);
-}
-
-int SecureScanTime(p_time time)
-{
+/*p_time SecureScanTime() {
     char buffer[6];
     int saisie_inval = 0;
+    int hour, min;
+    p_time time = (p_time)malloc(sizeof(t_time));
 
     do
     {
-        printf("Entrez l'heure de rendez-vous au format hh:mm : ");
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
@@ -119,7 +119,7 @@ int SecureScanTime(p_time time)
         {
             buffer[length - 1] = '\0';
         }
-        if (sscanf(buffer, "%2d:%2d", time->hour, time->min) == 2 && isValidTime(time))
+        if (sscanf(buffer, "%2d:%2d", &hour, &min) == 2 && isValidTime(time))
         {
             saisie_inval = 0; // Valid entry
         }
@@ -131,50 +131,52 @@ int SecureScanTime(p_time time)
     }
     while(saisie_inval == 1);
 
-    return saisie_inval;
-}
+    time->hour = hour;
+    time->min = min;
 
-int SecureScanDurate(p_time durate)
-{
-    char buffer[6];
-    int saisie_inval = 0;
+    return time;
+}*/
+p_time SecureScanTime() {
+    //test
+    int valid = 0;
+    int hour, min;
+    p_time time = (p_time)malloc(sizeof(t_time));
 
-    do
-    {
-        printf("Entrez la durée du rendez-vous au format hh:mm : ");
-        fgets(buffer, sizeof(buffer), stdin);
-
-        size_t length = strlen(buffer);
-        if (length > 0 && buffer[length - 1] == '\n')
-        {
-            buffer[length - 1] = '\0';
-        }
-        if (sscanf(buffer, "%2d:%2d", durate->hour, durate->min) == 2 && isValidTime(durate))
-        {
-            saisie_inval = 0; // Valid entry
-        }
-        else
-        {
-            printf("Format incorrect ou durée invalide. Veuillez réessayer.\n");
-            saisie_inval = 1;
+    do {
+        scanf("%2d:%2d", &hour, &min);
+        time->hour = hour;
+        time->min = min;
+        if (isValidTime(time) == 0) {
+            printf("Format incorrect ou heure invalide. Veuillez réessayer.\n");
         }
     }
-    while(saisie_inval == 1);
+    while(isValidTime(time) == 0);
 
-    return saisie_inval;
+    return time;
 }
 
-p_appointment InfoAppointment()
-{
-    p_appointment myAppointment;
+p_appointment ScanAppointment() {
+    p_appointment myAppointment = (p_appointment)malloc(sizeof(t_appointment));
 
-    printf("Entrez les informations pour le rendez-vous :\n");
+    printf("Entrez l'heure du rendez-vous au format hh:mm : ");
+    myAppointment->hour = SecureScanTime(); // Pour l'heure du rdv
 
-    SecureScanTime(myAppointment); // Pour l'heure du rdv
-    SecureScanDurate(myAppointment); // Pour la durée du rdv
-    SecureScanDate(myAppointment); // Pour la date du rdv
+    /*printf("Entrez la durée du rendez-vous au format hh:mm : ");
+    myAppointment->durate = SecureScanTime(); // Pour la durée du rdv
+
+    printf("Entrez l'objet du rendez-vous : ");
+    myAppointment->object = scanString(); // Pour l'objet du rdv
+
+    printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
+    myAppointment->date = SecureScanDate(); // Pour la date du rdv
+
+    myAppointment->next = NULL;*/
 
     return myAppointment;
+}
+
+void getAppointment(p_appointment myAppointment) {
+    printf("Rendez-vous du %d/%d/%d à %d:%d, durée de %d:%d, objet : %s\n", myAppointment->date->day, myAppointment->date->month, myAppointment->date->year, myAppointment->hour->hour, myAppointment->hour->min, myAppointment->durate->hour, myAppointment->durate->min, myAppointment->object);
 }
 
 //Fonction permettant la recherche d'un contact et propose une complétion automatique

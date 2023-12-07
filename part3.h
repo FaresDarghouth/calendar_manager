@@ -5,55 +5,50 @@
 #ifndef CALENDAR_MANAGER_PART3_H
 #define CALENDAR_MANAGER_PART3_H
 
-typedef struct s_contact
-{
+typedef struct s_contact {
     char *lname;
     char *fname;
-}t_contact, *p_contact;
-
-char *scanString(void);
-
+} t_contact, *p_contact;
 
 //struct for the date
-typedef struct s_date
-{
+typedef struct s_date {
     int day;
     int month;
     int year;
-}t_date, *p_date;
+} t_date, *p_date;
+
 
 //struct for the time
-typedef struct s_time
-{
+typedef struct s_time {
     int hour;
     int min;
-}t_time, *p_time;
+} t_time, *p_time;
 
 //struct for an appointment
-typedef struct s_appointment
-{
-    t_time hour;
-    t_time durate;
+typedef struct s_appointment {
+    p_time hour;
+    p_time durate;
     char *object;
-    t_date date;
+    p_date date;
     struct s_appointment *next;
-}t_appointment, *p_appointment;
+} t_appointment, *p_appointment;
 
-typedef struct s_entree
-{
+typedef struct s_entree {
     t_contact contact;
     t_appointment appointment;
-}t_entree, *p_entree;
+} t_entree, *p_entree;
 
+
+char *scanString();
 p_contact scanContact();
 int isLeapYear(int);
 int isValidDate(p_date);
-int SecureScanDate(p_date);
 int isValidTime(p_time);
-int SecureScanTime(p_time);
-int SecureScanDurate(p_time);
+p_date SecureScanDate();
+p_time SecureScanTime();
 
-p_appointment InfoAppointment();
+p_appointment ScanAppointment();
+void getAppointment(p_appointment);
 
 
 
