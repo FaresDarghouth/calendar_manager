@@ -13,7 +13,7 @@
 
 char *scanString() {
     char *saisie = (char*)malloc(sizeof(char));
-    scanf("%s", saisie);
+    fgets(saisie, MAX_NAME_LENGTH, stdin);
     return saisie;
 }
 
@@ -72,8 +72,7 @@ int isValidTime(p_time time) {
 
 p_date SecureScanDate() {
     char buffer[11];
-    int saisie_inval = 0;
-    int day, month, year;
+    int valid = 0;
     p_date date = (p_date)malloc(sizeof(t_date));
 
     do
@@ -81,33 +80,26 @@ p_date SecureScanDate() {
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
-        if (length > 0 && buffer[length - 1] == '\n')
-        {
+        if (length > 0 && buffer[length - 1] == '\n') {
             buffer[length - 1] = '\0';
         }
-        if (sscanf(buffer, "%2d/%2d/%4d", &day, &month, &year) == 3 && isValidDate(date))
-        {
-            saisie_inval = 0; // Valid entry
+        if (sscanf(buffer, "%2d/%2d/%4d", &date->day, &date->month, &date->year) == 3 && isValidDate(date)) {
+            valid = 0; // Valid entry
         }
-        else
-        {
-            printf("Format incorrect. Veuillez réessayer.\n");
-            saisie_inval = 1;
+        else {
+            printf("Format incorrect ou date invalide. Veuillez réessayer.\n");
+            fflush(stdout);
+            valid = 1;
         }
     }
-    while(saisie_inval == 1);
-
-    date->day = day;
-    date->month = month;
-    date->year = year;
+    while(valid == 1);
 
     return date;
 }
 
-/*p_time SecureScanTime() {
+p_time SecureScanTime() {
     char buffer[6];
-    int saisie_inval = 0;
-    int hour, min;
+    int valid = 0;
     p_time time = (p_time)malloc(sizeof(t_time));
 
     do
@@ -115,42 +107,19 @@ p_date SecureScanDate() {
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
-        if (length > 0 && buffer[length - 1] == '\n')
-        {
+        if (length > 0 && buffer[length - 1] == '\n') {
             buffer[length - 1] = '\0';
         }
-        if (sscanf(buffer, "%2d:%2d", &hour, &min) == 2 && isValidTime(time))
-        {
-            saisie_inval = 0; // Valid entry
+        if (sscanf(buffer, "%2d:%2d", &time->hour, &time->min) == 2 && isValidTime(time)) {
+            valid = 0; // Valid entry
         }
-        else
-        {
+        else {
             printf("Format incorrect ou heure invalide. Veuillez réessayer.\n");
-            saisie_inval = 1;
+            fflush(stdout);
+            valid = 1;
         }
     }
-    while(saisie_inval == 1);
-
-    time->hour = hour;
-    time->min = min;
-
-    return time;
-}*/
-p_time SecureScanTime() {
-    //test
-    int valid = 0;
-    int hour, min;
-    p_time time = (p_time)malloc(sizeof(t_time));
-
-    do {
-        scanf("%2d:%2d", &hour, &min);
-        time->hour = hour;
-        time->min = min;
-        if (isValidTime(time) == 0) {
-            printf("Format incorrect ou heure invalide. Veuillez réessayer.\n");
-        }
-    }
-    while(isValidTime(time) == 0);
+    while(valid == 1);
 
     return time;
 }
@@ -159,20 +128,28 @@ p_appointment ScanAppointment() {
     p_appointment myAppointment = (p_appointment)malloc(sizeof(t_appointment));
 
     printf("Entrez l'heure du rendez-vous au format hh:mm : ");
+    fflush(stdout);
     myAppointment->hour = SecureScanTime(); // Pour l'heure du rdv
 
-    /*printf("Entrez la durée du rendez-vous au format hh:mm : ");
+    printf("Entrez la durée du rendez-vous au format hh:mm : \n");
+    fflush(stdout);
     myAppointment->durate = SecureScanTime(); // Pour la durée du rdv
 
-    printf("Entrez l'objet du rendez-vous : ");
+    printf("Entrez l'objet du rendez-vous : \n");
+    fflush(stdout);
     myAppointment->object = scanString(); // Pour l'objet du rdv
 
-    printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
+    printf("Entrez la date de rendez-vous au format jj/mm/aaaa : \n");
+    fflush(stdout);
     myAppointment->date = SecureScanDate(); // Pour la date du rdv
 
-    myAppointment->next = NULL;*/
+    myAppointment->next = NULL;
 
     return myAppointment;
+}
+
+void getHour(p_appointment myAppointment) {
+    printf("Rendez-vous à %d:%d\n", myAppointment->hour->hour, myAppointment->hour->min);
 }
 
 void getAppointment(p_appointment myAppointment) {

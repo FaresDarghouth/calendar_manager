@@ -43,11 +43,12 @@ char *scanString();
 p_contact scanContact();
 int isLeapYear(int);
 int isValidDate(p_date);
-int isValidTime(p_time);
+int isValidTime(p_time time);
 p_date SecureScanDate();
 p_time SecureScanTime();
 
 p_appointment ScanAppointment();
+void getHour(p_appointment);
 void getAppointment(p_appointment);
 
 
