@@ -7,58 +7,14 @@
 #include <stdio.h>
 #include <string.h>
 #include "utils.h"
-/*char *scanString(void)
-{
-    char *saisie = (char*)malloc(sizeof(char));
-    scanf("%s", saisie);
-    return saisie;
-}
 
-
-void InfoContact()
-{
-    Contact contact;
-    printf("Entrez le nom : ");
-    contact.lname = scanString();
-
-    printf("Entrez le prenom : ");
-    contact.fname = scanString();
-
-    printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
-}
-
-void ScanDate(Rdv date)
-{
-    char buffer[11];
-    Rdv dday;
-    Rdv dmonth;
-    Rdv dyear;
-
-    int saisie_inval = 0;
-    do
-    {
-        printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
-        fgets(buffer, sizeof(buffer), stdin);
-        if (sscanf(buffer, "%2d/%2d/%4d", dday.day, dmonth.month, dyear.year);
-        {
-
-        }
-    }
-}
-
-void InfoRdv()
-{
-    Rdv rdv;
-    printf("Entrez la date de rendez-vous : ");
-    rdv.day
-}*/
 
 
 char *scanString(void)
 {
     int validation = 0;
     char temp[50];
-    scanf(" %49[^\n]", temp); // Lire jusqu'au caractère de nouvelle ligne, permettant des espaces
+    scanf(" %49[^\n]", temp);
     while(validation != strlen(temp)){
         validation = 0;
         for (int i = 0; i < strlen(temp); i++){
@@ -111,22 +67,10 @@ calendar_list *create_list() {
     }
     return list;
 }
-/*
-p_appointment InfoAppointment()
-{
-    p_appointment myAppointment;
 
-    printf("Entrez les informations pour le rendez-vous :\n");
 
-    SecureScanTime(myAppointment); // Pour l'heure du rdv
-    SecureScanDurate(myAppointment); // Pour la durée du rdv
-    SecureScanDate(myAppointment); // Pour la date du rdv
 
-    return myAppointment;
-}
-*/
-
-calendar_cell *create_cell() {
+calendar_cell *create_cell(p_entree entree,int level ) {
     /*
      * Create a cell with a value and a level
      * The cell is initialized with a NULL next array

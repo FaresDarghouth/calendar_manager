@@ -73,5 +73,18 @@ void InfoRdv();
 void add_calendar(calendar_list*);
 p_contact scanContact();
 void display_list_level_uniform(calendar_list);
+int isLeapYear(int);
+int isValidDate(p_date);
+int isValidTime(p_time time);
+p_date SecureScanDate();
+p_time SecureScanTime();
+
+p_appointment ScanAppointment();
+void getHour(p_appointment);
+void getAppointment(p_appointment);
+
+
+
+
 
 #endif //CALENDAR_MANAGER_PART3_H
