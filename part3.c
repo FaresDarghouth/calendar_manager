@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
+#include "utils.h"
 /*char *scanString(void)
 {
     char *saisie = (char*)malloc(sizeof(char));
@@ -84,14 +84,16 @@ char *scanString(void)
 
 p_contact scanContact()
 {
-    t_contact contact;
+    p_contact contact = (p_contact)malloc(sizeof(t_contact));
     printf("Entrez le nom : ");
-    contact.lname = scanString();
+    contact->lname = scanString();
 
     printf("Entrez le prenom : ");
-    contact.fname = scanString();
+    contact->fname = scanString();
 
-    printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact.lname,  contact.fname);
+    printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact->lname,  contact->fname);
+
+    return contact;
 }
 
 calendar_list *create_list() {
@@ -109,7 +111,7 @@ calendar_list *create_list() {
     }
     return list;
 }
-
+/*
 p_appointment InfoAppointment()
 {
     p_appointment myAppointment;
@@ -122,7 +124,7 @@ p_appointment InfoAppointment()
 
     return myAppointment;
 }
-
+*/
 
 calendar_cell *create_cell() {
     /*
@@ -131,7 +133,7 @@ calendar_cell *create_cell() {
      */
     calendar_cell *cell = (calendar_cell *)malloc(sizeof(calendar_cell));
     cell->contact_apt->contact = *scanContact();
-    cell->contact_apt->appointment = infoAppointment();
+    // cell->contact_apt->appointment = infoAppointment();
     cell->level = 4;
     cell->next = (calendar_cell **)malloc(cell->level * sizeof(calendar_cell*));
     for (int i = 0; i < cell->level; ++i) {
@@ -145,7 +147,7 @@ int compare_name(char* name1,char* name2)  {
     //Cas 1 = second letter not equal
     //Cas 2 = third letter not equal
     //Cas 3 = fourth letter not equal
-    int i = 0;
+    int i;
     if(name1[0] != name2[0]){
         i = 0;
     }else{
@@ -242,4 +244,29 @@ void add_calendar (calendar_list* calendar){
         printf("Enter 1 if you want to continue otherwise enter 0: ");
         scanf("%d", &c);
     }
+}
+
+
+void display_list_level_uniform(calendar_list list) {
+    /*
+     * Display the list at a given level
+     * The display is uniform, the cells are aligned
+     */
+    calendar_cell *temp = NULL;
+    calendar_cell *level_0 = NULL;
+    printf("[list head_%d @-]--", 4);
+    temp = list.heads[4];
+    level_0 = list.heads[0];
+    while (level_0 != NULL) {
+        if (temp != level_0 || temp == NULL) {
+            print_n_times_char('-', nb_digits((int) strlen(level_0->contact_apt->contact.lname))+9);
+            level_0 = level_0->next[0];
+        }
+        else {
+            printf(">[ %s|@-]--", temp->contact_apt->contact.lname);
+            temp = temp->next[4];
+            level_0 = level_0->next[0];
+        }
+    }
+    printf(">NULL");
 }

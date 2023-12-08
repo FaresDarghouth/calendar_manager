@@ -2,8 +2,13 @@
 // Created by camil on 13/11/2023.
 //
 
+
 #ifndef CALENDAR_MANAGER_PART3_H
 #define CALENDAR_MANAGER_PART3_H
+
+#include <stdlib.h>
+#include <stdio.h>
+#include "utils.h"
 
 typedef struct Contact
 {
@@ -63,11 +68,10 @@ p_appointment InfoAppointment();
 char *scanString(void);
 calendar_cell *create_cell();
 calendar_list *create_list();
-char *scanString(void);
 void InfoContact();
 void InfoRdv();
 void add_calendar(calendar_list*);
-
-
+p_contact scanContact();
+void display_list_level_uniform(calendar_list);
 
 #endif //CALENDAR_MANAGER_PART3_H
