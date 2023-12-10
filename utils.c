@@ -132,6 +132,7 @@ void listen_menu() {
                         }
                         case 2: {
                             p_d_cell cell = scan_cell(list);
+                            jump();
                             int method = insert_method();
                             switch (method) {
                                 case 1:
@@ -144,7 +145,7 @@ void listen_menu() {
                                     break;
                             }
                             new_line();
-                            printf("Cell has been inserted.");
+                            printf("Cell has been inserted.\n");
                             print_line();
                             break;
                         }
