@@ -235,7 +235,7 @@ p_d_list scan_list(int type) {
 
 p_d_cell scan_cell(p_d_list list) {
     int value, level;
-    printf("Enter the value of the cell: ");
+    printf("Enter the value of the cell between 0 and %d: ", list->max_level - 1);
     scanf("%d", &value);
     do {
         fflush(stdin);
@@ -243,7 +243,7 @@ p_d_cell scan_cell(p_d_list list) {
         scanf("%d", &level);
         if (level < 0 || level > list->max_level)
             printf("The level of the cell must be more than 0 and less than or equal to the max level of the list.\n");
-    } while (level < 0 || level > list->max_level);
+    } while (level < 0 || level >= list->max_level);
     return create_cell(value, level + 1);
 }
 
