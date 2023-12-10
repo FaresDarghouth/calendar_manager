@@ -17,7 +17,6 @@ typedef struct s_date {
     int year;
 } t_date, *p_date;
 
-
 //struct for the time
 typedef struct s_time {
     int hour;
@@ -26,35 +25,41 @@ typedef struct s_time {
 
 //struct for an appointment
 typedef struct s_appointment {
+    p_date date;
     p_time hour;
     p_time durate;
     char *object;
-    p_date date;
-    struct s_appointment *next;
 } t_appointment, *p_appointment;
 
-typedef struct s_entree {
-    t_contact contact;
-    t_appointment appointment;
-} t_entree, *p_entree;
+typedef struct s_entry {
+    int level;
+    char *name;
+    p_appointment *appointments;
+} t_entry, *p_entry;
 
+typedef struct s_agenda {
+    int max_level;
+    p_entry *entries;
+} t_agenda, *p_agenda;
 
 char *scanString();
-p_contact scanContact();
-int isLeapYear(int);
-int isValidDate(p_date);
+int isLeapYear(int year);
+int isValidDate(p_date date);
 int isValidTime(p_time time);
 p_date SecureScanDate();
 p_time SecureScanTime();
 
+p_contact ScanContact();
 p_appointment ScanAppointment();
-void getHour(p_appointment);
+char *contact_to_string(p_contact myContact);
+char *string_to_lowercase(char *string);
+p_entry ScanEntry();
+p_agenda createAgenda();
+
+void sorted_insert(p_agenda agenda, p_entry entries);
+
 void getAppointment(p_appointment);
 
 
-
-/*void searchContact(t_contact contacts[], int nbContacts);
-void loadContacts(p_contact *, int *);
-void freeContacts(p_Contact, int);*/
 
 #endif //CALENDAR_MANAGER_PART3_H
