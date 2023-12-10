@@ -3,6 +3,7 @@
 //
 
 #include "main.h"
+#include "part3.h"
 
 int main() {
     /*
@@ -78,5 +79,7 @@ int main() {
     setbuf(stdout, NULL);
     listen_menu();
 
+    p_appointment myAppointment = ScanAppointment();
+    getAppointment(myAppointment);
     return 0;
 }
