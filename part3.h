@@ -56,7 +56,7 @@ char *string_to_lowercase(char *string);
 p_entry ScanEntry();
 p_agenda createAgenda();
 
-void sorted_insert(p_agenda agenda, p_entry entries);
+//void sorted_insert(p_agenda agenda, p_entry entries);
 
 void getAppointment(p_appointment);
 

@@ -74,12 +74,10 @@ int main() {
 
 
     /*
-     * Implementation of the functions with the menu
+     * Implementation of the functions with the menu for the 2 first parts
      */
     setbuf(stdout, NULL);
     listen_menu();
 
-    p_appointment myAppointment = ScanAppointment();
-    getAppointment(myAppointment);
     return 0;
 }

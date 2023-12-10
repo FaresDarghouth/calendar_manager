@@ -180,7 +180,7 @@ p_agenda createAgenda() {
     return myAgenda;
 }
 
-void sorted_insert(p_agenda agenda, p_entry entry) {
+/*void sorted_insert(p_agenda agenda, p_entry entry) {
     int i = 0;
     while (i < agenda->max_level && agenda->entries[i] != NULL) {
         i++;
@@ -190,7 +190,7 @@ void sorted_insert(p_agenda agenda, p_entry entry) {
         agenda->entries = (p_entry*)realloc(agenda->entries, agenda->max_level * sizeof(p_entry));
     }
     agenda->entries[i] = entry;
-}
+}*/
 
 void getAppointment(p_appointment myAppointment) {
     printf("Rendez-vous du %d/%d/%d à %d:%d, durée de %d:%d, objet : %s\n", myAppointment->date->day, myAppointment->date->month, myAppointment->date->year, myAppointment->hour->hour, myAppointment->hour->min, myAppointment->durate->hour, myAppointment->durate->min, myAppointment->object);
