@@ -68,6 +68,10 @@ int main() {
 
     //print_both_np_operation_aligned();
 
+
+//---------------------------------------------------------------------------------------------
+
+
     /*
      * Implementation of the functions with the menu
      */
