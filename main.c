@@ -64,6 +64,7 @@ int main() {
     };
     searchContact(contacts, )
     }*/
+    setbuf(stdout, NULL);
     p_appointment myAppointment = ScanAppointment();
     //getHour(myAppointment);
     getAppointment(myAppointment);

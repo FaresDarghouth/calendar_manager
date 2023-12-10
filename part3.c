@@ -77,6 +77,7 @@ p_date SecureScanDate() {
 
     do
     {
+        fflush(stdin); // Clear input buffer (stdin
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
@@ -104,6 +105,7 @@ p_time SecureScanTime() {
 
     do
     {
+        fflush(stdin); // Clear input buffer (stdin
         fgets(buffer, sizeof(buffer), stdin);
 
         size_t length = strlen(buffer);
@@ -131,16 +133,13 @@ p_appointment ScanAppointment() {
     fflush(stdout);
     myAppointment->hour = SecureScanTime(); // Pour l'heure du rdv
 
-    printf("Entrez la durée du rendez-vous au format hh:mm : \n");
-    fflush(stdout);
+    printf("Entrez la durée du rendez-vous au format hh:mm : ");
     myAppointment->durate = SecureScanTime(); // Pour la durée du rdv
 
     printf("Entrez l'objet du rendez-vous : \n");
-    fflush(stdout);
     myAppointment->object = scanString(); // Pour l'objet du rdv
 
-    printf("Entrez la date de rendez-vous au format jj/mm/aaaa : \n");
-    fflush(stdout);
+    printf("Entrez la date de rendez-vous au format jj/mm/aaaa : ");
     myAppointment->date = SecureScanDate(); // Pour la date du rdv
 
     myAppointment->next = NULL;
