@@ -143,7 +143,7 @@ void listen_menu() {
                                 default:
                                     break;
                             }
-                            print_line();
+                            new_line();
                             printf("Cell has been inserted.");
                             print_line();
                             break;
@@ -235,13 +235,13 @@ p_d_list scan_list(int type) {
 
 p_d_cell scan_cell(p_d_list list) {
     int value, level;
-    printf("Enter the value of the cell between 0 and %d: ", list->max_level - 1);
+    printf("Enter the value of the cell: ");
     scanf("%d", &value);
     do {
         fflush(stdin);
-        printf("Enter the level of the cell: ");
+        printf("Enter the level of the cell between 0 and %d: ", list->max_level - 1);
         scanf("%d", &level);
-        if (level < 0 || level > list->max_level)
+        if (level < 0 || level >= list->max_level)
             printf("The level of the cell must be more than 0 and less than or equal to the max level of the list.\n");
     } while (level < 0 || level >= list->max_level);
     return create_cell(value, level + 1);
@@ -250,9 +250,11 @@ p_d_cell scan_cell(p_d_list list) {
 int insert_method() {
     int method;
     do {
-        printf("Enter the method of insertion:\n");
-        printf("1. Insert in head\n");
-        printf("2. Sorted insertion\n");
+        printf("Enter the method of insertion:");
+        jump();
+        printf("\t1. Insert in head\n");
+        printf("\t2. Sorted insertion");
+        jump();
         scanf("%d", &method);
         if (method != 1 && method != 2)
             printf("Your choice must be 1 or 2.\n");
