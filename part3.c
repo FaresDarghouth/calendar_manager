@@ -171,7 +171,6 @@ p_contact scanContact()
     contact->fname = scanString();
 
     printf("Contact enregistre :\nNom : %s\nPrenom : %s\n", contact->lname,  contact->fname);
-    printf("L1");
     return contact;
 }
 
@@ -192,16 +191,16 @@ calendar_list *create_list() {
 }
 
 
-calendar_cell *create_cell(p_entree entree, int level) {
+calendar_cell *create_cell(t_contact *entree) {
     /*
      * Create a cell with a value and a level
      * The cell is initialized with a NULL next array
      */
     calendar_cell *cell = (calendar_cell *)malloc(sizeof(calendar_cell));
-    cell->contact_apt = entree;
-    cell->level = level;
-    cell->next = (calendar_cell **)malloc(level* sizeof(calendar_cell*));
-    for (int i = 0; i < cell->level; ++i) {
+    cell->contact = entree;
+    cell->level = 4;
+    cell->next = (calendar_cell **)malloc(4* sizeof(calendar_cell*));
+    for (int i = 0; i < 4; ++i) {
         cell->next[i] = NULL;
     }
     return cell;
@@ -214,6 +213,7 @@ int compare_name(char* name1,char* name2)  {
     //Cas 2 = third letter not equal
     //Cas 3 = fourth letter not equal
     int i;
+    printf("switch");
     printf("%s", name1);
     printf("%s", name2);
     if(name1[0] != name2[0]){
@@ -229,123 +229,70 @@ int compare_name(char* name1,char* name2)  {
             }
         }
     }
+    printf("%d",i);
     return i;
 }
 
-void display_list_level_uniform(calendar_list list) {
+
+
+
+void display_list_level_uniform(calendar_list *list, int level) {
     /*
      * Display the list at a given level
      * The display is uniform, the cells are aligned
      */
+    printf("Xu3");
     calendar_cell *temp = NULL;
     calendar_cell *level_0 = NULL;
-    printf("[list head_%d @-]--", 4);
-    temp = list.heads[4];
-    level_0 = list.heads[0];
+    printf("[list head_%d @-]--", level);
+    temp = list->heads[level];
+    level_0 = list->heads[0];
     while (level_0 != NULL) {
         if (temp != level_0 || temp == NULL) {
-            print_n_times_char('-', nb_digits((int) strlen(level_0->contact_apt->contact.lname))+9);
+            print_n_times_char('-', nb_digits((int) strlen(level_0->contact->lname))+9);
             level_0 = level_0->next[0];
         }
         else {
-            printf(">[ %s|@-]--", temp->contact_apt->contact.lname);
-            temp = temp->next[4];
+            printf(">[ %s|@-]--", temp->contact->lname);
+            temp = temp->next[level];
             level_0 = level_0->next[0];
         }
     }
     printf(">NULL");
 }
 
-void add_calendar (calendar_list* calendar){
-    int i, j, c = 1;
-    calendar_cell *new_cell;
-    calendar_cell *temp;
-    calendar->max_level = 4;
-    p_entree entree = (t_entree *)malloc(sizeof(t_entree));
-    while(c == 1){
-        entree->contact = *scanContact();
-        //new_cell = create_cell();
-        if(calendar->heads[3] == NULL ){
-            new_cell = create_cell(entree, 4);
-            for (i = 0; i < calendar->max_level; i++){
-                calendar->heads[i] = new_cell;
-                printf("%s", calendar->heads[i]->contact_apt->contact.lname);
-            }
-        }else {
-            for(j = 0; j < calendar->max_level; j++){
-                temp = calendar->heads[j];
-                switch (compare_name(entree->contact.lname,temp->contact_apt->contact.lname)) {
-                    case 0 : // first letter not equal
-                        new_cell = create_cell(entree, 4);
-                        if((int) new_cell->contact_apt->contact.lname[0] < (int) temp->contact_apt->contact.lname[0]){
-                            for (i = 0; i < j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }else{
-                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[0] < (int) temp->next[j]->contact_apt->contact.lname[0])){
-                                temp = temp->next[j];
-                            }
-                            for (i = 0; i<j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }
-                    case 1 : // second letter not equal
-                        new_cell = create_cell(entree, 3);
-                        if((int) new_cell->contact_apt->contact.lname[1] < (int) temp->contact_apt->contact.lname[1]){
-                            for (i = 0; i < j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }else{
-                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[1] < (int) temp->next[j]->contact_apt->contact.lname[1])){
-                                temp = temp->next[j];
-                            }
-                            for (i = 0; i<j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }
-                    case 2 : // third letter not equal
-                        new_cell = create_cell(entree, 2);
-                        if((int) new_cell->contact_apt->contact.lname[2] < (int) temp->contact_apt->contact.lname[2]){
-                            for (i = 0; i < j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }else{
-                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[2] < (int) temp->next[j]->contact_apt->contact.lname[2])){
-                                temp = temp->next[j];
-                            }
-                            for (i = 0; i<j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }
-                    case 3 : // fourth letter not equal
-                        new_cell = create_cell(entree, 1);
-                        if((int) new_cell->contact_apt->contact.lname[3] < (int) temp->contact_apt->contact.lname[3]){
-                            for (i = 0; i < j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }else{
-                            while((temp->next != NULL) || ((int) new_cell->next[j]->contact_apt->contact.lname[3] < (int) temp->next[j]->contact_apt->contact.lname[3])){
-                                temp = temp->next[j];
-                            }
-                            for (i = 0; i<j; i++){
-                                new_cell->next[i] = temp->next[i];
-                                temp->next[i] = new_cell;
-                            }
-                        }
-                }
-            }
-        }
-        display_list_level_uniform(*calendar);
-        printf("Enter 1 if you want to continue otherwise enter 0: ");
-        scanf("%d", &c);
+void display_list_uniform(calendar_list *list) {
+    /*
+     * Display the list at each level
+     * The display is uniform, the cells are aligned
+     */
+    for (int i = 0; i < list->max_level; ++i) {
+        display_list_level_uniform(list, i);
+        printf("\n");
     }
 }
+
+void sorted_insert(calendar_list *list, calendar_cell *cell, int level) {
+    printf("Xu");
+    int comparer = compare_name(cell->contact->lname, list->heads[0]->contact->lname);
+    printf("Xu1");
+    calendar_cell *temp = (calendar_cell *)malloc(sizeof(calendar_cell));
+    printf("Xu2");
+    for (int i = 0; i < 4-comparer; ++i) {
+        if (list->heads[i] == NULL || cell->contact->lname[comparer] < list->heads[i]->contact->lname[comparer]) {
+            cell->next[i] = list->heads[i];
+            list->heads[i] = cell;
+        }
+        else {
+            temp = list->heads[i];
+            while (temp->next[i] != NULL && temp->next[i]->contact->lname[comparer] < cell->contact->lname[comparer]) {
+                temp = temp->next[i];
+            }
+            cell->next[i] = temp->next[i];
+            temp->next[i] = cell;
+        }
+    }
+}
+
 
 

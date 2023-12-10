@@ -50,15 +50,11 @@ typedef struct s_appointment
     struct s_appointment *next;
 }t_appointment, *p_appointment;
 
-typedef struct s_entree
-{
-    t_contact contact;
-}t_entree, *p_entree;
-
 
 
 typedef struct calendar{
-    p_entree contact_apt;
+    t_contact *contact;
+    t_appointment appointment;
     int level;
     struct calendar **next;
 } calendar_cell;
@@ -72,11 +68,11 @@ typedef struct calendar_list {
 int compare_name(char*,char*);
 p_appointment InfoAppointment();
 char *scanString(void);
-calendar_cell *create_cell(p_entree, int);
+calendar_cell *create_cell(t_contact*);
 calendar_list *create_list();
 void InfoContact();
 void InfoRdv();
-void add_calendar(calendar_list*);
+//void add_calendar(calendar_list*);
 p_contact scanContact();
 int isLeapYear(int);
 int isValidDate(p_date);
@@ -85,8 +81,11 @@ p_date SecureScanDate();
 p_time SecureScanTime();
 p_appointment ScanAppointment();
 void getHour(p_appointment);
+void display_list_uniform(calendar_list*);
 void getAppointment(p_appointment);
-
+void insert_in_calendar(calendar_list*, calendar_cell *,int);
+void display_list_level_uniform(calendar_list *, int);
+void sorted_insert(calendar_list *list, calendar_cell *cell, int level);
 
 #endif //CALENDAR_MANAGER_PART3_H
 
