@@ -241,10 +241,10 @@ p_d_cell scan_cell(p_d_list list) {
         fflush(stdin);
         printf("Enter the level of the cell: ");
         scanf("%d", &level);
-        if (level > list->max_level)
-            printf("The level of the cell must be less than or equal to the max level of the list.\n");
-    } while (level > list->max_level);
-    return create_cell(value, level);
+        if (level < 0 || level > list->max_level)
+            printf("The level of the cell must be more than 0 and less than or equal to the max level of the list.\n");
+    } while (level < 0 || level > list->max_level);
+    return create_cell(value, level + 1);
 }
 
 int insert_method() {
