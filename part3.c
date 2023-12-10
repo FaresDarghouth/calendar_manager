@@ -89,7 +89,6 @@ p_date SecureScanDate() {
         }
         else {
             printf("Format incorrect ou date invalide. Veuillez réessayer.\n");
-            fflush(stdout);
             valid = 1;
         }
     }
@@ -117,7 +116,6 @@ p_time SecureScanTime() {
         }
         else {
             printf("Format incorrect ou heure invalide. Veuillez réessayer.\n");
-            fflush(stdout);
             valid = 1;
         }
     }
