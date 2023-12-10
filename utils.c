@@ -52,7 +52,7 @@ void print_menu() {
     printf("What would you like to do ?");
     jump();
     printf("\t1. Create a list\n");
-    printf("\t2. Quit\n");
+    printf("\t2. Quit");
     jump();
 }
 
@@ -73,7 +73,8 @@ void print_menu_after_creation() {
     jump();
     printf("\t1. Display the list\n");
     printf("\t2. Create a cell to insert\n");
-    printf("\t99. Quit\n");
+    printf("\t99. Quit");
+    jump();
 }
 
 int scan_menu_after_creation() {
@@ -93,7 +94,8 @@ void print_menu_list_for_search() {
     jump();
     printf("\t1. Display the list\n");
     printf("\t2. Search for a value\n");
-    printf("\t99. Quit\n");
+    printf("\t99. Quit");
+    jump();
 }
 
 int scan_menu_list_for_search() {
@@ -115,7 +117,7 @@ void listen_menu() {
             fflush(stdout);
             int type = type_of_list();
             p_d_list list = scan_list(type);
-            jump();
+            new_line();
             printf("List has been created.");
             jump();
             int choice2;
@@ -124,40 +126,7 @@ void listen_menu() {
                 while (1) {
                     switch (choice2) {
                         case 1: {
-                            jump();
                             display_list_uniform(list);
-                            jump();
-                            print_line();
-                            break;
-                        }
-                        case 2: {
-                            int value = scan_value();
-                            print_is_present_level0(list, value);
-                            print_is_present_dichotomy(list, value);
-                            print_time_level0(list, value);
-                            print_time_dichotomy(list, value);
-                            print_nb_operation_level0(list, value);
-                            print_nb_operation_dichotomy(list, value);
-                            break;
-                        }
-                        case 99: {
-                            printf("Goodbye.");
-                            exit(0);
-                        }
-                        default:
-                            break;
-                    }
-                    choice2 = scan_menu_after_creation();
-                }
-            }
-            else {
-                choice2 = scan_menu_list_for_search();
-                while (1) {
-                    switch (choice2) {
-                        case 1: {
-                            jump();
-                            display_list_uniform(list);
-                            jump();
                             print_line();
                             break;
                         }
@@ -186,6 +155,36 @@ void listen_menu() {
                         default:
                             break;
                     }
+                    choice2 = scan_menu_after_creation();
+                }
+            }
+            else {
+                choice2 = scan_menu_list_for_search();
+                while (1) {
+                    switch (choice2) {
+                        case 1: {
+                            jump();
+                            display_list_uniform(list);
+                            jump();
+                            print_line();
+                            break;
+                        }
+                        case 2: {
+                            int value = scan_value();
+                            print_is_present_dichotomy(list, value);
+                            print_time_level0(list, value);
+                            print_time_dichotomy(list, value);
+                            print_nb_operation_level0(list, value);
+                            print_nb_operation_dichotomy(list, value);
+                            break;
+                        }
+                        case 99: {
+                            printf("Goodbye.");
+                            exit(0);
+                        }
+                        default:
+                            break;
+                    }
                     choice2 = scan_menu_list_for_search();
                 }
             }
@@ -203,10 +202,11 @@ int type_of_list() {
     int type;
     do {
         fflush(stdin);
-        printf("Enter the type of list:\n");
+        printf("Enter the type of list:");
         jump();
         printf("\t1. Normal list\n");
-        printf("\t2. List for researches\n");
+        printf("\t2. List for researches");
+        jump();
         scanf("%d", &type);
         if (type != 1 && type != 2)
             printf("Your choice must be 1 or 2.\n");
@@ -225,10 +225,8 @@ p_d_list scan_list(int type) {
     } while (max_level < 1);
     switch (type) {
         case 1:
-            scanf("%d", &max_level);
             return create_list(max_level);
         case 2:
-            scanf("%d", &max_level);
             return create_list_for_search(max_level);
         default:
             return NULL;

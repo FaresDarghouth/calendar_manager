@@ -5,7 +5,9 @@
 #include "main.h"
 
 int main() {
-    /*p_d_list list = create_list(5);
+    /*
+     * Manual implementation of the functions
+    p_d_list list = create_list(5);
     printf("After create_list (empty list):");
     jump();
     display_list_uniform(list);
@@ -62,10 +64,14 @@ int main() {
 
     print_line();
 
-    print_both_np_operation_for_all_lists();
+    print_both_np_operation_for_all_lists();*/
 
-    //print_both_np_operation_aligned();*/
+    //print_both_np_operation_aligned();
 
+    /*
+     * Implementation of the functions with the menu
+     */
+    setbuf(stdout, NULL);
     listen_menu();
 
     return 0;
