@@ -1,4 +1,11 @@
 //
+// Created by maxen on 08/12/2023.
+//
+
+#ifndef UNTITLED2_PART3_H
+#define UNTITLED2_PART3_H
+
+//
 // Created by camil on 13/11/2023.
 //
 
@@ -36,17 +43,16 @@ typedef struct s_time
 //struct for an appointment
 typedef struct s_appointment
 {
-    t_time hour;
-    t_time durate;
+    p_time hour;
+    p_time durate;
     char *object;
-    t_date date;
+    p_date date;
     struct s_appointment *next;
 }t_appointment, *p_appointment;
 
 typedef struct s_entree
 {
     t_contact contact;
-    t_appointment appointment;
 }t_entree, *p_entree;
 
 
@@ -66,25 +72,22 @@ typedef struct calendar_list {
 int compare_name(char*,char*);
 p_appointment InfoAppointment();
 char *scanString(void);
-calendar_cell *create_cell();
+calendar_cell *create_cell(p_entree, int);
 calendar_list *create_list();
 void InfoContact();
 void InfoRdv();
 void add_calendar(calendar_list*);
 p_contact scanContact();
-void display_list_level_uniform(calendar_list);
 int isLeapYear(int);
 int isValidDate(p_date);
 int isValidTime(p_time time);
 p_date SecureScanDate();
 p_time SecureScanTime();
-
 p_appointment ScanAppointment();
 void getHour(p_appointment);
 void getAppointment(p_appointment);
 
 
-
-
-
 #endif //CALENDAR_MANAGER_PART3_H
+
+#endif //UNTITLED2_PART3_H
