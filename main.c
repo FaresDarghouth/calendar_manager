@@ -5,7 +5,7 @@
 #include "main.h"
 
 int main() {
-    p_d_list list = create_list(5);
+    /*p_d_list list = create_list(5);
     printf("After create_list (empty list):");
     jump();
     display_list_uniform(list);
@@ -64,7 +64,9 @@ int main() {
 
     print_both_np_operation_for_all_lists();
 
-    //print_both_np_operation_aligned();
+    //print_both_np_operation_aligned();*/
+
+    listen_menu();
 
     return 0;
 }
